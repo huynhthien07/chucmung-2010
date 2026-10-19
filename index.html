@@ -1,0 +1,1408 @@
+<!doctype html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="description" content="Một đóa hồng pha lê và một lá thư tay dành riêng cho cậu nhân ngày Phụ nữ Việt Nam 20/10.">
+<meta name="theme-color" content="#f6c9dc">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Thư Hồng 20.10 · Happy Women's Day">
+<meta property="og:description" content="Một đóa hồng pha lê và một lá thư tay dành riêng cho cậu nhân ngày Phụ nữ Việt Nam 20/10.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill='%23e2477f' d='M12 21s-7.5-4.6-9.6-9.2C.9 8.3 3 4.5 6.6 4.5c2 0 3.6 1.1 4.4 2.6.8-1.5 2.4-2.6 4.4-2.6 3.6 0 5.7 3.8 4.2 7.3C19.5 16.4 12 21 12 21z'/%3E%3C/svg%3E">
+</head>
+<body>
+<title>Thư Hồng 20.10</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@300;400;500;600&family=Dancing+Script:wght@500;700&family=Great+Vibes&family=Lora:ital,wght@0,400;1,400;1,500&family=Playfair+Display:ital,wght@0,500;0,600;1,500&display=swap">
+<style>
+/* Layout: bầu trời 3D toàn màn hình phía sau, các cảnh xếp nối tiếp ở giữa:
+   nhập tên → hộp quà → đóa hồng tương tác → phong thư → thư tay → lời kết */
+:root{
+  --sky:#c3d6ff; --lilac:#e3d2f7; --blush:#ffd4e4; --petal:#ffe8f0;
+  --rose:#e2477f; --rose-deep:#b8326a; --ink:#5e2142; --ink-soft:#8f5274;
+  --paper:#fffaf5; --gold:#c9984f;
+  --glass:rgba(255,255,255,.46); --glass-line:rgba(255,255,255,.8);
+  --f-script:"Great Vibes","Dancing Script",cursive;
+  --f-viet-script:"Dancing Script","Great Vibes",cursive;
+  --f-display:"Playfair Display",Georgia,"Times New Roman",serif;
+  --f-letter:"Lora",Georgia,"Times New Roman",serif;
+  --f-body:"Be Vietnam Pro",system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
+  color-scheme:light;
+}
+html,body{height:100%}
+body{margin:0;overflow:hidden;font-family:var(--f-body);color:var(--ink);
+  background:linear-gradient(180deg,var(--sky) 0%,var(--lilac) 38%,var(--blush) 72%,var(--petal) 100%);
+  -webkit-font-smoothing:antialiased;-webkit-tap-highlight-color:transparent}
+button,input{font:inherit}
+button{touch-action:manipulation}
+[hidden]{display:none !important}
+
+/* ---------- bầu trời ---------- */
+.sky{position:fixed;inset:0;z-index:0;overflow:hidden;pointer-events:none}
+.sun{position:absolute;top:-18vmax;right:-14vmax;width:60vmax;height:60vmax;border-radius:50%;
+  background:radial-gradient(closest-side,rgba(255,252,240,.95),rgba(255,236,244,.55) 40%,rgba(255,230,240,0))}
+.cloud{position:absolute;left:0;width:620px;height:200px;border-radius:50%;opacity:.85;
+  background:radial-gradient(closest-side,rgba(255,255,255,.95),rgba(255,255,255,.55) 50%,rgba(255,255,255,0));
+  filter:blur(6px);animation:drift linear infinite}
+.cloud::after{content:"";position:absolute;left:22%;top:-40%;width:55%;height:110%;border-radius:50%;
+  background:radial-gradient(closest-side,rgba(255,255,255,.9),rgba(255,255,255,0))}
+.c1{top:6%;animation-duration:110s;animation-delay:-20s}
+.c2{top:30%;width:460px;height:150px;animation-duration:140s;animation-delay:-90s;opacity:.7}
+.c3{top:58%;width:720px;height:240px;animation-duration:160s;animation-delay:-40s;opacity:.6}
+.c4{top:16%;width:380px;height:130px;animation-duration:120s;animation-delay:-70s;opacity:.65}
+.fog{position:absolute;left:-10%;right:-10%;bottom:-8%;height:34%;
+  background:radial-gradient(60% 80% at 30% 100%,rgba(255,196,218,.9),transparent 70%),radial-gradient(60% 80% at 75% 100%,rgba(255,214,230,.95),transparent 70%);
+  filter:blur(10px)}
+@keyframes drift{from{transform:translateX(-50vw)}to{transform:translateX(120vw)}}
+#scene{position:fixed;inset:0;width:100%;height:100%;z-index:1;display:block;pointer-events:none}
+
+/* ---------- các cảnh ---------- */
+.screen{position:fixed;inset:0;z-index:3;display:flex;flex-direction:column;align-items:center;gap:14px;
+  padding-top:calc(env(safe-area-inset-top,0px) + 28px);padding-bottom:calc(env(safe-area-inset-bottom,0px) + 26px);
+  padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));
+  box-sizing:border-box;opacity:0;visibility:hidden;pointer-events:none;
+  transition:opacity .8s ease,visibility 0s linear .8s}
+.screen.active{opacity:1;visibility:visible;transition:opacity .8s ease,visibility 0s}
+.screen.active > *{pointer-events:auto}
+.screen.active > .slot{pointer-events:none}
+.screen.active > .slot.touch{pointer-events:auto;cursor:grab;touch-action:none}
+.screen.active > .slot.touch:active{cursor:grabbing}
+.slot.touch:focus-visible{outline:2px solid rgba(255,255,255,.95);outline-offset:-8px;border-radius:26px}
+.screen.center{justify-content:center}
+.slot{flex:1 1 auto;width:100%;min-height:90px}
+.scroll{overflow-y:auto;overscroll-behavior:contain}
+
+.eyebrow{margin:0;font:600 .74rem/1.4 var(--f-body);letter-spacing:.28em;text-transform:uppercase;color:var(--rose-deep);opacity:.85}
+.script-title{margin:.04em 0 0;padding:0 .18em;font:400 clamp(3rem,11vw,5.8rem)/1.05 var(--f-script);text-wrap:balance;text-align:center;
+  background:linear-gradient(180deg,#ff94bc 10%,#e04a84 62%,#b8326a);-webkit-background-clip:text;background-clip:text;color:transparent;
+  filter:drop-shadow(0 2px 0 rgba(255,255,255,.9)) drop-shadow(0 10px 22px rgba(214,66,125,.28))}
+.date-big{margin:0;font:500 clamp(1.1rem,3.4vw,1.5rem)/1 var(--f-display);letter-spacing:.34em;color:var(--rose);padding-left:.34em}
+.name-title{margin:.05em 0;font:700 clamp(2.3rem,8.4vw,3.6rem)/1.15 var(--f-viet-script);color:var(--rose-deep);text-align:center;text-wrap:balance;
+  text-shadow:0 2px 0 rgba(255,255,255,.85),0 10px 26px rgba(214,66,125,.25)}
+.stage-text{display:flex;flex-direction:column;align-items:center;gap:4px;max-width:560px;text-align:center;animation:rise .9s cubic-bezier(.2,.8,.2,1) both}
+.stage-text .lead{margin:0;font:italic 400 clamp(1rem,3.4vw,1.16rem)/1.6 var(--f-letter);color:var(--ink-soft);text-wrap:balance}
+.screen:not(.active) .stage-text{animation:none}
+@keyframes rise{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:none}}
+
+.chip{display:inline-flex;align-items:center;gap:8px;margin-top:8px;padding:7px 14px;border-radius:999px;
+  background:rgba(255,255,255,.55);border:1px solid var(--glass-line);font:500 .82rem var(--f-body);color:var(--ink-soft);letter-spacing:.02em}
+.chip svg{width:16px;height:16px;fill:none;stroke:var(--rose);stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;border:0;border-radius:999px;padding:15px 28px;cursor:pointer;
+  font:500 1rem/1 var(--f-body);letter-spacing:.01em;position:relative;overflow:hidden;
+  transition:transform .25s ease,box-shadow .25s ease,background-color .25s ease,opacity .4s ease}
+.btn svg{width:18px;height:18px;fill:currentColor;flex:none}
+.btn.primary{color:#fff;background:linear-gradient(135deg,#ff7fae,#e2477f 58%,#c63a73);
+  box-shadow:0 10px 26px rgba(226,71,127,.38),inset 0 1px 0 rgba(255,255,255,.45)}
+.btn.primary::after{content:"";position:absolute;top:0;bottom:0;left:-60%;width:40%;transform:skewX(-20deg);
+  background:linear-gradient(90deg,transparent,rgba(255,255,255,.45),transparent);animation:shine 3.6s ease-in-out infinite}
+.btn.primary:hover{transform:translateY(-2px);box-shadow:0 14px 32px rgba(226,71,127,.5)}
+.btn.ghost{color:var(--rose-deep);background:rgba(255,255,255,.62);box-shadow:inset 0 0 0 1px rgba(226,71,127,.28),0 6px 18px rgba(214,76,135,.12)}
+.btn.ghost:hover{background:rgba(255,255,255,.85)}
+.btn:focus-visible,.envelope:focus-visible,.music-btn:focus-visible{outline:3px solid #fff;outline-offset:3px;box-shadow:0 0 0 6px rgba(226,71,127,.45)}
+.btn.pulse{animation:pulse 2.2s ease-in-out infinite}
+@keyframes shine{0%,55%{left:-60%}100%{left:130%}}
+@keyframes pulse{0%,100%{transform:scale(1)}50%{transform:scale(1.05)}}
+.row{display:flex;flex-wrap:wrap;gap:12px;justify-content:center}
+
+.glass{background:var(--glass);-webkit-backdrop-filter:blur(18px) saturate(1.4);backdrop-filter:blur(18px) saturate(1.4);
+  border:1px solid var(--glass-line);border-radius:28px;box-shadow:0 24px 60px rgba(214,76,135,.22),inset 0 1px 0 rgba(255,255,255,.85)}
+
+/* ---------- chờ chút ---------- */
+#loader{justify-content:center;gap:16px}
+.loader-heart{width:86px;height:86px;overflow:visible}
+.loader-heart path{fill:rgba(255,122,168,0);stroke:#e2477f;stroke-width:1.1;stroke-linejoin:round;stroke-dasharray:70;stroke-dashoffset:70;
+  animation:drawHeart 1.6s ease forwards,fillHeart .9s ease 1.3s forwards,beat 1.1s ease-in-out 2s infinite;transform-origin:12px 13px}
+@keyframes drawHeart{to{stroke-dashoffset:0}}
+@keyframes fillHeart{to{fill:rgba(255,122,168,.9)}}
+@keyframes beat{0%,100%{transform:scale(1)}30%{transform:scale(1.12)}60%{transform:scale(.98)}}
+.loader-title{margin:0;font:700 clamp(1.9rem,7vw,2.6rem)/1.2 var(--f-viet-script);color:var(--rose-deep)}
+.loader-sub{margin:0;font:italic .98rem var(--f-letter);color:var(--ink-soft);min-height:1.5em;transition:opacity .4s}
+.loader-bar{width:160px;height:3px;border-radius:3px;background:rgba(226,71,127,.15);overflow:hidden}
+.loader-bar i{display:block;height:100%;width:40%;border-radius:3px;background:linear-gradient(90deg,#ff9fc2,#e2477f);animation:load 1.2s ease-in-out infinite}
+@keyframes load{from{transform:translateX(-100%)}to{transform:translateX(260%)}}
+
+/* ---------- khung & ánh kim ---------- */
+.frame{position:fixed;z-index:4;pointer-events:none;border:1px solid rgba(201,152,79,.42);border-radius:22px;box-shadow:inset 0 0 0 4px rgba(255,255,255,.16);
+  top:calc(env(safe-area-inset-top,0px) + 10px);bottom:calc(env(safe-area-inset-bottom,0px) + 10px);left:calc(env(safe-area-inset-left,0px) + 10px);right:calc(env(safe-area-inset-right,0px) + 10px)}
+.frame::before,.frame::after{content:"";position:absolute;left:50%;width:9px;height:9px;margin-left:-4.5px;transform:rotate(45deg);background:linear-gradient(135deg,#f3d9a4,#b8894a)}
+.frame::before{top:-5px}
+.frame::after{bottom:-5px}
+.foil{background:linear-gradient(100deg,#8f5c22 0%,#c99a52 22%,#9c6a2c 45%,#d9b06a 65%,#8a5a20 100%);background-size:220% 100%;
+  -webkit-background-clip:text;background-clip:text;color:transparent;animation:foil 7s linear infinite}
+@keyframes foil{from{background-position:0% 50%}to{background-position:220% 50%}}
+.brand{position:fixed;z-index:5;top:calc(env(safe-area-inset-top,0px) + 24px);left:calc(env(safe-area-inset-left,0px) + 32px);margin:0;
+  font:600 .68rem var(--f-body);letter-spacing:.32em;text-transform:uppercase;color:var(--rose-deep);opacity:.7}
+@media (max-width:760px){.brand{display:none}}
+
+/* ---------- nhập tên ---------- */
+#welcome{padding-top:calc(env(safe-area-inset-top,0px) + 34px)}
+.welcome-grid{flex:1 1 auto;min-height:0;width:min(1120px,100%);display:grid;grid-template-columns:minmax(0,1fr);
+  grid-template-areas:"intro" "hero" "form";grid-template-rows:auto minmax(110px,1fr) auto;gap:12px;justify-items:center;text-align:center}
+.intro{grid-area:intro;display:flex;flex-direction:column;align-items:center;gap:4px;max-width:540px;animation:rise 1s cubic-bezier(.2,.8,.2,1) both}
+.welcome-grid > .slot{grid-area:hero;height:100%;min-height:0}
+.ornament{display:flex;align-items:center;gap:14px;margin:6px 0 0}
+.ornament::before,.ornament::after{content:"";width:44px;height:1px;background:linear-gradient(90deg,rgba(201,152,79,0),#c9984f)}
+.ornament::after{transform:scaleX(-1)}
+.ornament span{font:500 clamp(1rem,3vw,1.2rem) var(--f-display);letter-spacing:.34em;padding-left:.34em}
+.intro-lead{margin:8px 0 0;font:italic 400 clamp(1rem,2.6vw,1.15rem)/1.65 var(--f-letter);color:var(--ink-soft);text-wrap:balance}
+.name-card{grid-area:form;width:min(440px,100%);box-sizing:border-box;padding:22px 24px 18px;display:flex;flex-direction:column;gap:12px;text-align:left;
+  border-color:rgba(201,152,79,.4);animation:rise 1s cubic-bezier(.2,.8,.2,1) .15s both}
+.field-label{font:600 .72rem var(--f-body);letter-spacing:.24em;text-transform:uppercase;color:var(--ink-soft)}
+.field{position:relative}
+.field::after{content:"";position:absolute;left:0;right:0;bottom:0;height:2px;background:linear-gradient(90deg,#e2477f,#f5b0c9);transform:scaleX(0);transform-origin:left;transition:transform .45s cubic-bezier(.2,.8,.2,1)}
+.field:focus-within::after{transform:scaleX(1)}
+#nameInput{width:100%;box-sizing:border-box;padding:8px 2px 10px;border:0;border-bottom:1.5px solid rgba(201,152,79,.55);border-radius:0;background:transparent;
+  color:var(--ink);font:500 1.4rem/1.3 var(--f-display);outline:none}
+#nameInput::placeholder{color:#c49ab0;font-style:italic;font-weight:400}
+.preview{display:flex;flex-direction:column;align-items:flex-start;padding:8px 14px 10px;border-radius:14px;background:rgba(255,255,255,.55);animation:rise .45s ease both}
+.preview small{font:600 .68rem var(--f-body);letter-spacing:.22em;text-transform:uppercase;color:var(--ink-soft)}
+.preview strong{font:700 1.65rem/1.25 var(--f-viet-script);color:var(--rose-deep);overflow-wrap:anywhere}
+.btn.block{width:100%}
+.btn .arrow{fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;transition:transform .25s}
+.btn:hover .arrow{transform:translateX(4px)}
+.form-msg{margin:0;font-size:.9rem;line-height:1.45;color:var(--rose-deep)}
+.form-msg:empty{display:none}
+.signed{margin:0;padding-top:10px;border-top:1px solid rgba(201,152,79,.25);display:flex;align-items:baseline;justify-content:space-between;gap:10px;
+  font:600 .68rem var(--f-body);letter-spacing:.2em;text-transform:uppercase;color:var(--ink-soft)}
+.signed b{font:700 1.25rem var(--f-viet-script);letter-spacing:0;text-transform:none}
+.shake{animation:shake .5s cubic-bezier(.36,.07,.19,.97) both}
+@keyframes shake{10%,90%{transform:translateX(-2px)}20%,80%{transform:translateX(4px)}30%,50%,70%{transform:translateX(-8px)}40%,60%{transform:translateX(8px)}}
+@media (min-width:900px) and (min-aspect-ratio:1/1){
+  #welcome{padding-left:max(48px,env(safe-area-inset-left,0px));padding-right:max(48px,env(safe-area-inset-right,0px))}
+  .welcome-grid{grid-template-columns:minmax(0,1fr) minmax(0,1.1fr);grid-template-areas:". hero" "intro hero" "form hero" ". hero";
+    grid-template-rows:1fr auto auto 1fr;column-gap:48px;row-gap:24px;justify-items:start;text-align:left}
+  .intro{align-items:flex-start}
+  .intro .script-title{text-align:left;padding-left:0;font-size:clamp(4rem,6.6vw,6rem)}
+  .welcome-grid > .slot{width:100%}
+}
+
+/* ---------- hộp quà ---------- */
+#giftStage.opening .btn{opacity:0;transform:scale(.9);pointer-events:none}
+.tap-note{margin:0;font:italic .95rem var(--f-letter);color:var(--ink-soft)}
+
+/* ---------- phong thư ---------- */
+#envelope{gap:26px}
+.envelope{position:relative;width:min(360px,84vw);max-width:100%;aspect-ratio:3/2;border:0;padding:0;background:none;cursor:pointer;perspective:1000px;
+  filter:drop-shadow(0 26px 30px rgba(190,60,115,.28))}
+.envelope.drop{animation:envDrop 1.1s cubic-bezier(.2,.9,.25,1.12) both}
+@keyframes envDrop{from{transform:translateY(-70px) rotate(-7deg) scale(.85);opacity:0}to{transform:none;opacity:1}}
+.envelope > span{position:absolute;display:block}
+.env-back{inset:0;border-radius:12px;background:linear-gradient(160deg,#f77fa9,#df5289);z-index:1}
+.env-letter{left:7%;right:7%;top:6%;height:86%;z-index:2;box-sizing:border-box;padding:11% 10% 0;border-radius:6px;background:var(--paper);
+  box-shadow:0 2px 8px rgba(120,30,70,.15);display:flex !important;flex-direction:column;align-items:center;gap:6px;
+  transition:transform 1.1s cubic-bezier(.3,.8,.25,1) .5s}
+.mini-greet{font:700 1.25rem/1.2 var(--f-viet-script);color:var(--rose-deep);max-width:100%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.mini-lines{width:100%}
+.mini-lines i{display:block;height:2px;margin:9px 0;border-radius:2px;background:rgba(226,71,127,.2)}
+.mini-lines i:nth-child(2){width:86%}
+.mini-lines i:nth-child(3){width:64%}
+.env-pocket{inset:0;z-index:3;border-radius:12px;overflow:hidden}
+.env-pocket::before{content:"";position:absolute;inset:0;background:linear-gradient(200deg,#ffb7cf,#ff8cb4);clip-path:polygon(0 0,50% 56%,100% 0,100% 100%,0 100%)}
+.env-pocket::after{content:"";position:absolute;inset:0;background:linear-gradient(0deg,#ff9cbe,#ffc6d9);clip-path:polygon(0 100%,50% 48%,100% 100%)}
+.env-flap{left:0;right:0;top:0;height:62%;z-index:4;transform-origin:50% 0;transition:transform .9s cubic-bezier(.5,0,.3,1),z-index 0s linear .42s}
+.env-flap::before{content:"";position:absolute;inset:0;border-radius:12px 12px 0 0;background:linear-gradient(180deg,#ff86b0,#ffb0cb);clip-path:polygon(0 0,100% 0,50% 100%)}
+.env-seal{left:50%;top:62%;width:60px;height:60px;margin:-30px 0 0 -30px;z-index:5;border-radius:50%;
+  background:radial-gradient(circle at 34% 30%,#ff80aa,#c42d65 70%);box-shadow:0 4px 12px rgba(140,20,60,.38),inset 0 0 0 4px rgba(255,255,255,.14);
+  display:grid !important;place-items:center;transition:transform .5s,opacity .5s;animation:sealPulse 2.2s ease-in-out infinite}
+.env-seal svg{width:26px;height:26px;fill:#ffe3ee}
+@keyframes sealPulse{0%,100%{transform:scale(1)}50%{transform:scale(1.09)}}
+.envelope.open .env-seal{transform:scale(.2);opacity:0;animation:none}
+.envelope.open .env-flap{transform:rotateX(180deg);z-index:1}
+.envelope.open .env-letter{transform:translateY(-54%)}
+
+/* ---------- thư tay ---------- */
+#letter{gap:14px}
+.paper{position:relative;width:min(640px,100%);flex:1 1 auto;min-height:0;box-sizing:border-box;border-radius:8px;
+  background-color:var(--paper);
+  background-image:radial-gradient(120% 50% at 0% 0%,rgba(255,206,224,.5),transparent 60%),radial-gradient(90% 45% at 100% 100%,rgba(255,214,230,.55),transparent 60%),
+    url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='180' height='180'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 .5 0 0 0 0 .3 0 0 0 0 .35 0 0 0 .07 0'/></filter><rect width='100%25' height='100%25' filter='url(%23n)'/></svg>");
+  box-shadow:0 30px 70px rgba(170,50,105,.25),inset 0 0 0 1px rgba(255,255,255,.9)}
+.screen.active .paper{animation:paperIn 1s cubic-bezier(.2,.8,.2,1) both}
+.paper.swap{animation:paperSwap .9s cubic-bezier(.2,.8,.2,1) both !important}
+@keyframes paperIn{from{opacity:0;transform:translateY(40px) scale(.94)}to{opacity:1;transform:none}}
+@keyframes paperSwap{0%{opacity:0;transform:rotateY(-12deg) translateX(-30px)}100%{opacity:1;transform:none}}
+.paper-inner{position:relative;margin:12px;min-height:calc(100% - 24px);box-sizing:border-box;padding:clamp(30px,6vw,54px) clamp(22px,6vw,58px) clamp(28px,5vw,44px);
+  border:1.5px solid rgba(201,152,79,.55);outline:1px solid rgba(201,152,79,.28);outline-offset:-7px;border-radius:4px}
+.paper-top{display:flex;justify-content:space-between;align-items:baseline;gap:12px;flex-wrap:wrap}
+.paper-date{margin:0;font:italic 500 .95rem var(--f-display);color:var(--ink-soft);letter-spacing:.02em}
+.paper-mark{margin:0;font:600 .7rem var(--f-body);letter-spacing:.3em;text-transform:uppercase;color:var(--gold)}
+.paper-greet{margin:.45em 0 .7em;font:700 clamp(1.9rem,6.4vw,2.6rem)/1.2 var(--f-viet-script);color:var(--rose-deep);text-wrap:balance;overflow-wrap:anywhere}
+.paper-body p{margin:0 0 1em;max-width:62ch;font:400 clamp(1.02rem,3.6vw,1.13rem)/1.86 var(--f-letter);color:#4b2136;text-wrap:pretty}
+.paper-body p.fade{animation:rise .7s ease both}
+.paper-body p.typing::after{content:"";display:inline-block;width:2px;height:1.05em;margin-left:2px;vertical-align:-.15em;background:var(--rose);animation:caret 1s steps(1) infinite}
+.paper-body p.closing{font:700 clamp(1.5rem,5vw,1.9rem)/1.3 var(--f-viet-script);color:var(--rose)}
+@keyframes caret{50%{opacity:0}}
+.paper-ps{margin:1.2em 0 0;padding-top:1em;border-top:1px dashed rgba(201,152,79,.55);font:italic 400 1rem/1.75 var(--f-letter);color:var(--ink-soft);
+  opacity:0;transform:translateY(10px);transition:opacity .9s ease,transform .9s ease}
+.paper-ps b{font-style:normal;font-weight:600;color:var(--rose-deep);letter-spacing:.02em}
+.paper-sign{margin-top:1.4em;text-align:right;opacity:0;transform:translateY(12px);transition:opacity .9s ease .25s,transform .9s ease .25s}
+.paper-ps.show,.paper-sign.show{opacity:1;transform:none}
+.paper-sign span{display:block;font:italic 1rem var(--f-letter);color:var(--ink-soft)}
+.paper-sign strong{display:block;font:700 clamp(2rem,6vw,2.5rem)/1.2 var(--f-viet-script);color:var(--rose-deep)}
+
+/* ---------- lời kết ---------- */
+#finale{gap:10px}
+.finale-card{display:flex;flex-direction:column;align-items:center;gap:6px;max-width:560px;box-sizing:border-box;padding:18px 22px 20px;text-align:center;animation:rise 1s cubic-bezier(.2,.8,.2,1) both}
+.finale-card .lead{margin:4px 0 0;font:italic 400 clamp(1rem,3.4vw,1.15rem)/1.6 var(--f-letter);color:var(--ink);text-wrap:balance}
+.finale-card .script-title{font-size:clamp(2.4rem,7vw,3.6rem)}
+.finale-from{margin:0;font:700 1.5rem var(--f-viet-script);color:var(--rose-deep)}
+
+/* ---------- nhạc ---------- */
+.music-btn{position:fixed;z-index:6;right:calc(16px + env(safe-area-inset-right,0px));bottom:calc(16px + env(safe-area-inset-bottom,0px));
+  height:46px;padding:0 16px 0 14px;border-radius:999px;border:1px solid var(--glass-line);cursor:pointer;
+  background:rgba(255,255,255,.58);-webkit-backdrop-filter:blur(12px);backdrop-filter:blur(12px);color:var(--rose-deep);
+  display:flex;align-items:center;gap:9px;font:500 .85rem var(--f-body);box-shadow:0 8px 22px rgba(214,76,135,.2)}
+.eq{display:flex;align-items:flex-end;gap:3px;height:16px}
+.eq i{display:block;width:3px;height:4px;border-radius:2px;background:var(--rose)}
+.music-btn.on .eq i{animation:eq .9s ease-in-out infinite alternate}
+.music-btn.on .eq i:nth-child(2){animation-delay:-.3s}
+.music-btn.on .eq i:nth-child(3){animation-delay:-.6s}
+.music-btn.on .eq i:nth-child(4){animation-delay:-.15s}
+@keyframes eq{from{height:3px}to{height:16px}}
+
+.tap-heart{position:fixed;z-index:7;width:16px;height:16px;pointer-events:none}
+.tap-heart svg{width:100%;height:100%;display:block}
+
+@media (max-width:620px){
+  #welcome{padding-bottom:calc(env(safe-area-inset-bottom,0px) + 74px)}
+  .music-btn{width:46px;padding:0;justify-content:center}
+  .music-btn .mlabel{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+}
+@media (max-height:700px){
+  .name-card{padding:16px 18px 14px;gap:8px}
+  .intro-lead{display:none}
+  .script-title{font-size:clamp(2.6rem,9vw,4rem)}
+}
+@media (prefers-reduced-motion:reduce){
+  .cloud,.btn.pulse,.btn.primary::after,.env-seal{animation:none}
+  .screen,.envelope.drop,.stage-text,.paper,.preview{animation-duration:.01s !important;transition-duration:.2s}
+}
+</style>
+
+<div class="sky" aria-hidden="true"><i class="sun"></i><i class="cloud c1"></i><i class="cloud c2"></i><i class="cloud c3"></i><i class="cloud c4"></i><i class="fog"></i></div>
+<canvas id="scene" aria-hidden="true"></canvas>
+<div class="frame" aria-hidden="true"></div>
+<p class="brand" aria-hidden="true">Thư Hồng · 20.10</p>
+
+<!-- 0. Chờ chút -->
+<section id="loader" class="screen active" aria-live="polite">
+  <svg class="loader-heart" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21s-7.5-4.6-9.6-9.2C.9 8.3 3 4.5 6.6 4.5c2 0 3.6 1.1 4.4 2.6.8-1.5 2.4-2.6 4.4-2.6 3.6 0 5.7 3.8 4.2 7.3C19.5 16.4 12 21 12 21z"/></svg>
+  <p class="loader-title">Chờ chút thôi nhé…</p>
+  <p class="loader-sub" id="loaderSub">Đang chọn đóa hồng đẹp nhất</p>
+  <div class="loader-bar" aria-hidden="true"><i></i></div>
+  <button class="btn primary pulse" id="enterBtn" type="button" hidden>
+    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3v10.6A4 4 0 1 0 14 17V7h4V3h-6z"/></svg>
+    Chạm để mở quà
+  </button>
+</section>
+
+<!-- 1. Nhập tên -->
+<section id="welcome" class="screen" aria-label="Nhập tên">
+  <div class="welcome-grid">
+    <header class="intro">
+      <p class="eyebrow foil">Vietnamese Women's Day</p>
+      <h1 class="script-title">Happy Women's Day</h1>
+      <p class="ornament"><span class="foil">20 · 10 · 2026</span></p>
+      <p class="intro-lead">Một đóa hồng pha lê và một lá thư tay đang chờ cậu mở.</p>
+    </header>
+    <div class="slot" id="heroSlot"></div>
+    <form class="glass name-card" id="nameForm" autocomplete="off" novalidate>
+      <label class="field-label" for="nameInput">Tên của cậu là gì?</label>
+      <div class="field">
+        <input id="nameInput" name="nameInput" type="text" maxlength="40" placeholder="Nhập tên của cậu" autocapitalize="words" spellcheck="false" enterkeyhint="go">
+      </div>
+      <div class="preview" id="preview" hidden aria-live="polite"><small>Thư sẽ được gửi tới</small><strong id="previewName"></strong></div>
+      <button class="btn primary block" type="submit" id="receiveBtn">
+        Nhận quà của cậu
+        <svg class="arrow" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+      </button>
+      <p class="form-msg" id="formMsg" role="status"></p>
+      <p class="signed">Gửi tặng bởi <b class="foil js-sender"></b></p>
+    </form>
+  </div>
+</section>
+
+<!-- 2. Hộp quà 3D -->
+<section id="giftStage" class="screen" aria-label="Hộp quà">
+  <div class="stage-text">
+    <p class="eyebrow">Dành riêng cho</p>
+    <h2 class="name-title js-name"></h2>
+    <p class="lead">Có một món quà nhỏ tớ gửi cậu nè</p>
+  </div>
+  <div class="slot touch" id="giftSlot" aria-hidden="true"></div>
+  <button class="btn primary pulse" id="openGiftBtn" type="button">
+    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 7h-2.2A3 3 0 0 0 12 3.8 3 3 0 0 0 6.2 7H4a1 1 0 0 0-1 1v3a1 1 0 0 0 1 1h.5v8a1 1 0 0 0 1 1h13a1 1 0 0 0 1-1v-8H20a1 1 0 0 0 1-1V8a1 1 0 0 0-1-1zM15 5a1 1 0 1 1 0 2h-2a2 2 0 0 1 2-2zM9 5a2 2 0 0 1 2 2H9a1 1 0 1 1 0-2zm2 15H6.5v-8H11v8zm0-10H5V9h6v1zm6.5 10H13v-8h4.5v8zM19 10h-6V9h6v1z"/></svg>
+    Chạm để mở quà
+  </button>
+</section>
+
+<!-- 3. Đóa hồng tương tác -->
+<section id="roseStage" class="screen" aria-label="Đóa hồng">
+  <div class="stage-text">
+    <p class="eyebrow">Đóa hồng pha lê dành tặng</p>
+    <h2 class="name-title js-name"></h2>
+    <span class="chip"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 11V5.5a1.5 1.5 0 0 1 3 0V10m0-1.5a1.5 1.5 0 0 1 3 0V11m0-1a1.5 1.5 0 0 1 3 0v4.5c0 3.6-2.4 6.5-6 6.5-2.6 0-4.2-1.2-5.6-3.4L4.2 14a1.5 1.5 0 0 1 2.5-1.6L9 15"/></svg>Kéo để xoay · Chạm để hoa tỏa sáng</span>
+  </div>
+  <div class="slot touch" id="roseSlot" tabindex="0" role="img" aria-label="Đóa hồng pha lê 3D. Kéo hoặc dùng phím mũi tên để xoay, nhấn Enter để hoa tỏa sáng."></div>
+  <button class="btn primary" id="toEnvelope" type="button">
+    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 4H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2zm0 4.2-8 5-8-5V6l8 5 8-5v2.2z"/></svg>
+    Mở thư tay
+  </button>
+</section>
+
+<!-- 4. Phong thư -->
+<section id="envelope" class="screen center" aria-label="Phong thư">
+  <div class="stage-text">
+    <p class="eyebrow">Thư tay gửi</p>
+    <h2 class="name-title js-name"></h2>
+  </div>
+  <button class="envelope" id="env" type="button" aria-label="Mở phong thư">
+    <span class="env-back"></span>
+    <span class="env-letter"><span class="mini-greet">Thân gửi <span class="js-given"></span></span><span class="mini-lines"><i></i><i></i><i></i></span></span>
+    <span class="env-pocket"></span>
+    <span class="env-flap"></span>
+    <span class="env-seal"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21s-7.5-4.6-9.6-9.2C.9 8.3 3 4.5 6.6 4.5c2 0 3.6 1.1 4.4 2.6.8-1.5 2.4-2.6 4.4-2.6 3.6 0 5.7 3.8 4.2 7.3C19.5 16.4 12 21 12 21z"/></svg></span>
+  </button>
+  <p class="tap-note">Chạm vào con dấu để mở thư</p>
+</section>
+
+<!-- 5. Thư tay -->
+<section id="letter" class="screen" aria-label="Bức thư">
+  <article class="paper scroll" id="paper">
+    <div class="paper-inner">
+      <div class="paper-top"><p class="paper-date" id="pDate"></p><p class="paper-mark">20 · 10</p></div>
+      <h2 class="paper-greet" id="pGreet"></h2>
+      <div class="paper-body" id="pBody"></div>
+      <p class="paper-ps" id="pPs"></p>
+      <div class="paper-sign" id="pSign"><span>Thân mến,</span><strong id="pSender"></strong></div>
+    </div>
+  </article>
+  <div class="row">
+    <button class="btn ghost" id="skipBtn" type="button">Hiện hết thư</button>
+    <button class="btn ghost" id="anotherBtn" type="button" hidden>Đọc một lá thư khác</button>
+    <button class="btn primary" id="toFinale" type="button" hidden>Tiếp tục</button>
+  </div>
+</section>
+
+<!-- 6. Lời kết -->
+<section id="finale" class="screen" aria-label="Lời chúc cuối">
+  <div class="glass finale-card">
+    <p class="eyebrow">20 · 10 · 2026</p>
+    <h2 class="script-title">Happy Women's Day</h2>
+    <p class="lead">Chúc <span class="js-name"></span> luôn xinh đẹp, tự tin và lấp lánh như đóa hồng pha lê này.</p>
+    <p class="finale-from">— <span class="js-sender"></span></p>
+  </div>
+  <div class="slot touch" id="finaleSlot" tabindex="0" role="img" aria-label="Đóa hồng pha lê 3D. Kéo hoặc dùng phím mũi tên để xoay, nhấn Enter để hoa tỏa sáng."></div>
+  <div class="row">
+    <button class="btn ghost" id="rereadBtn" type="button">Đọc lại thư</button>
+    <button class="btn ghost" id="newLetterBtn" type="button">Đọc thư khác</button>
+    <button class="btn primary" id="restartBtn" type="button">Tặng người khác</button>
+  </div>
+</section>
+
+<button class="music-btn" id="musicBtn" type="button" aria-pressed="false">
+  <span class="eq" aria-hidden="true"><i></i><i></i><i></i><i></i></span><span class="mlabel">Bật nhạc</span>
+</button>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script>
+/* =====================================================================
+   CHỈNH SỬA Ở ĐÂY
+   - sender: tên người gửi, luôn đứng cuối mỗi bức thư.
+   - letters: các bộ thư. Mỗi lần mở, trang chọn ngẫu nhiên một bộ.
+     {ten} = tên gọi (chữ cuối của tên), {name} = họ tên đầy đủ đã nhập.
+   - musicUrl: file nhạc nền đặt cạnh index.html (đang dùng "nhac.mp3").
+     Để trống, hoặc nếu file không tải được, trang sẽ tự dùng nhạc hộp nhạc.
+   ===================================================================== */
+const CONFIG = {
+  sender: "Nguyễn Thế Việt",
+  date: "Ngày 20 tháng 10 năm 2026",
+  musicUrl: "nhac.mp3",
+  letters: [
+    {
+      paragraphs: [
+        "Hôm nay là 20/10, và tớ muốn dành riêng mấy dòng này cho {ten}, cô gái mà tớ tin là sinh ra để tỏa sáng.",
+        "Tớ biết có những ngày cậu mệt, có những lúc cậu tự hỏi mình đã đủ giỏi chưa. Nhưng cậu ơi, chỉ riêng việc cậu vẫn kiên trì bước tiếp mỗi ngày đã là một điều tuyệt vời lắm rồi.",
+        "Đừng bao giờ thu mình lại để vừa vặn với kỳ vọng của ai cả. Cứ lớn lên, cứ rực rỡ theo cách của riêng cậu. Thế giới này cần đúng phiên bản đó của cậu."
+      ],
+      closing: "Chúc mừng ngày của cậu nhé, {ten}!",
+      ps: "Đóa hồng pha lê kia giống cậu lắm: càng có ánh sáng chiếu vào, càng lấp lánh."
+    },
+    {
+      paragraphs: [
+        "Tớ luôn thấy {ten} là người có những ước mơ thật đẹp.",
+        "Ngày 20/10 này, tớ mong cậu nhớ rằng mọi ước mơ của cậu đều xứng đáng được theo đuổi, dù lớn hay nhỏ, dù người khác có hiểu hay không.",
+        "Hành trình nào cũng có lúc chông chênh. Những lúc ấy, cậu cứ đi chậm lại cũng được, miễn là đừng dừng hẳn. Mỗi bước nhỏ hôm nay đều đang đưa cậu đến gần hơn với phiên bản mà cậu hằng mong.",
+        "Tớ tin cậu làm được. Thật đấy."
+      ],
+      closing: "Cứ mơ thật lớn nhé, {ten}!",
+      ps: "Lần tới gặp nhau, kể tớ nghe một ước mơ của cậu nhé. Tớ sẽ là người cổ vũ to nhất."
+    },
+    {
+      paragraphs: [
+        "Có một điều tớ luôn ngưỡng mộ ở {ten}: cậu vừa dịu dàng, lại vừa mạnh mẽ đến lạ.",
+        "Cậu dịu dàng với mọi người xung quanh, và mạnh mẽ trước những khó khăn mà cậu chẳng mấy khi kể ra. Nhưng hôm nay, tớ mong cậu cũng dịu dàng với chính mình một chút.",
+        "Hãy cho phép bản thân được nghỉ ngơi, được vui, được nhận yêu thương mà không cần lý do. Vì cậu xứng đáng với tất cả những điều tốt đẹp nhất."
+      ],
+      closing: "Một ngày 20/10 thật hạnh phúc nhé, {ten}!",
+      ps: "Nếu hôm nào thấy mệt, cứ nhắn tớ. Tớ luôn sẵn sàng nghe cậu kể."
+    },
+    {
+      paragraphs: [
+        "Nếu có ai hỏi tớ điều gì làm một ngày bình thường trở nên đặc biệt, tớ sẽ nói: là khi được thấy {ten} cười.",
+        "Nụ cười của cậu có một năng lượng rất riêng: ấm áp, chân thành, và khiến người khác thấy mọi chuyện rồi sẽ ổn thôi.",
+        "Nhân ngày 20/10, tớ chúc cậu luôn giữ được nụ cười ấy, chúc mọi điều cậu đang cố gắng đều đơm hoa kết trái, và chúc cậu luôn được bao quanh bởi những người thương cậu thật lòng."
+      ],
+      closing: "Cười thật nhiều nhé, {ten}!",
+      ps: "Đọc đến đây, cậu đang mỉm cười đúng không? Tớ đoán thế mà."
+    },
+    {
+      paragraphs: [
+        "Tớ muốn nói với {ten} một điều mà có lẽ cậu chưa được nghe đủ: cậu đã làm rất tốt rồi.",
+        "Nhìn lại chặng đường đã qua, cậu đã vượt qua biết bao thử thách, đã trưởng thành hơn, bản lĩnh hơn và tuyệt vời hơn rất nhiều so với chính cậu của ngày hôm qua.",
+        "Phía trước chắc chắn còn nhiều điều thú vị đang chờ. Tớ chúc cậu luôn đủ tự tin để nắm lấy cơ hội, đủ kiên cường để vượt qua thử thách, và đủ bình yên để tận hưởng từng khoảnh khắc."
+      ],
+      closing: "Tự hào về cậu lắm, {ten}!",
+      ps: "Hôm nay hãy tự thưởng cho mình một điều nhỏ xinh nhé. Cậu xứng đáng mà."
+    },
+    {
+      paragraphs: [
+        "Mỗi bông hoa nở vào một mùa riêng, và {ten} cũng vậy: cậu không cần vội vàng so sánh mình với bất kỳ ai.",
+        "Có người rực rỡ từ sớm, có người cần thêm chút thời gian để bung nở. Nhưng một khi đã nở, đóa hoa nào cũng đẹp theo cách không thể thay thế.",
+        "Tớ chúc cậu luôn tin vào nhịp điệu của riêng mình, kiên nhẫn với bản thân, và khi đến lúc, hãy nở thật rạng rỡ nhé."
+      ],
+      closing: "Chúc cậu một mùa nở hoa thật đẹp, {ten}!",
+      ps: "Tớ chọn đóa hồng pha lê này vì nó không bao giờ tàn, giống như niềm tin tớ dành cho cậu."
+    },
+    {
+      paragraphs: [
+        "Gửi {ten}, cô gái mang theo cả một bầu trời năng lượng tích cực!",
+        "Cảm ơn cậu vì đã luôn là nguồn động lực cho những người xung quanh, kể cả khi chính cậu cũng cần được tiếp thêm năng lượng.",
+        "Hôm nay, đến lượt tớ gửi lại cho cậu một chút năng lượng nhé: chúc cậu thật khỏe, thật vui, học tập và công việc đều thuận lợi, và mỗi sáng thức dậy đều có một lý do để hào hứng."
+      ],
+      closing: "Cố lên, {ten}! Cậu làm được hết!",
+      ps: "Lưu bức thư này lại nhé. Hôm nào thiếu động lực, cứ mở ra đọc lại một lần."
+    },
+    {
+      paragraphs: [
+        "20/10 năm nay, tớ không chỉ muốn chúc {ten} thật xinh đẹp, mà còn muốn chúc cậu luôn yêu thương chính mình thật nhiều.",
+        "Cậu không cần phải hoàn hảo mới đáng được yêu thương. Những vụng về, những lần vấp ngã, những ngày chưa như ý, tất cả đều là một phần làm nên con người đáng quý của cậu.",
+        "Hãy cứ là chính cậu: chân thành, ấm áp và đầy bản lĩnh. Tớ tin những điều tốt đẹp nhất đang trên đường tìm đến cậu."
+      ],
+      closing: "Mãi tỏa sáng nhé, {ten}. Chúc mừng 20/10!",
+      ps: "Đóa hồng ấy sẽ luôn lấp lánh ở đây, mỗi khi cậu cần nhớ rằng mình quý giá đến nhường nào."
+    }
+  ]
+};
+</script>
+<script>
+(() => {
+'use strict';
+const $ = s => document.querySelector(s);
+const REDUCED = matchMedia('(prefers-reduced-motion: reduce)').matches;
+const SMALL = Math.min(innerWidth, innerHeight) < 600;
+const sleep = ms => new Promise(r => setTimeout(r, ms));
+const rand = (a, b) => a + Math.random() * (b - a);
+const clamp = (v, a, b) => Math.max(a, Math.min(b, v));
+const HEART_PATH = 'M12 21s-7.5-4.6-9.6-9.2C.9 8.3 3 4.5 6.6 4.5c2 0 3.6 1.1 4.4 2.6.8-1.5 2.4-2.6 4.4-2.6 3.6 0 5.7 3.8 4.2 7.3C19.5 16.4 12 21 12 21z';
+const S = { state: 'loading', screen: 'loader', name: '', given: '', letter: null, lastLetter: -1, px: 0, py: 0, tx: 0, ty: 0 };
+
+/* ---------------- tên ---------------- */
+function formatName(raw) {
+  return String(raw || '').normalize('NFC').replace(/\s+/g, ' ').trim().split(' ').filter(Boolean)
+    .map(w => w.charAt(0).toLocaleUpperCase('vi') + w.slice(1).toLocaleLowerCase('vi')).join(' ').slice(0, 40);
+}
+const fillText = s => String(s || '').replace(/\{ten\}/g, S.given).replace(/\{name\}/g, S.name);
+
+/* ---------------- tim bay khi chạm ---------------- */
+const TAP_COLORS = ['#ff7fae', '#ffb3cc', '#e2477f', '#ffd1e0', '#ffffff'];
+function tapBurst(x, y, n = 6) {
+  if (REDUCED) return;
+  for (let i = 0; i < n; i++) {
+    const el = document.createElement('span');
+    el.className = 'tap-heart';
+    el.innerHTML = `<svg viewBox="0 0 24 24"><path d="${HEART_PATH}" fill="${TAP_COLORS[i % TAP_COLORS.length]}" stroke="rgba(226,71,127,.35)" stroke-width=".8"/></svg>`;
+    el.style.left = x + 'px'; el.style.top = y + 'px';
+    document.body.appendChild(el);
+    const a = Math.random() * Math.PI * 2, d = 36 + Math.random() * 56, sc = 0.7 + Math.random() * 0.8;
+    const anim = el.animate([
+      { transform: 'translate(-50%,-50%) scale(.3)', opacity: 1 },
+      { transform: `translate(calc(-50% + ${Math.cos(a) * d}px), calc(-50% + ${Math.sin(a) * d - 34}px)) scale(${sc}) rotate(${(Math.random() - .5) * 70}deg)`, opacity: 0 }
+    ], { duration: 900 + Math.random() * 600, easing: 'cubic-bezier(.2,.7,.3,1)' });
+    anim.onfinish = () => el.remove();
+  }
+}
+
+/* ---------------- nhạc nền: hộp nhạc tự tạo bằng Web Audio ---------------- */
+function createMusic() {
+  const btn = $('#musicBtn'), label = btn.querySelector('.mlabel');
+  let ctx = null, master = null, bus = null, timer = null, step = 0, nextT = 0, on = false, audioEl = null, userOff = false;
+  let useFile = !!CONFIG.musicUrl, fadeTimer = null;
+  const FILE_VOL = 0.5;
+  function fadeTo(target, ms, done) {
+    clearInterval(fadeTimer);
+    const from = audioEl.volume, t0 = performance.now();
+    fadeTimer = setInterval(() => {
+      const k = Math.min(1, (performance.now() - t0) / ms);
+      audioEl.volume = from + (target - from) * k;
+      if (k >= 1) { clearInterval(fadeTimer); if (done) done(); }
+    }, 40);
+  }
+  if (useFile) {
+    audioEl = new Audio(); audioEl.src = CONFIG.musicUrl; audioEl.loop = true; audioEl.preload = 'auto'; audioEl.volume = 0;
+    audioEl.addEventListener('error', () => { useFile = false; if (on) { on = false; start(); } });
+  }
+  const EIGHTH = 60 / 76 / 2;
+  const CHORDS = [[62, 'M'], [57, 'M'], [59, 'm'], [54, 'm'], [55, 'M'], [62, 'M'], [55, 'M'], [57, 'M']];
+  const ARP = { M: [0, 7, 12, 16, 19, 16, 12, 7], m: [0, 7, 12, 15, 19, 15, 12, 7] };
+  const TRI = { M: [0, 4, 7], m: [0, 3, 7] };
+  const _ = 0;
+  const MEL = [
+    [78, _, 81, _, 86, _, 81, 78], [76, _, _, 73, 76, _, 81, _], [78, _, 83, _, 81, _, 78, _], [78, _, _, _, 73, _, _, _],
+    [74, _, 79, _, 83, _, 81, 79], [78, _, _, 74, 78, _, 81, _], [83, _, 81, _, 79, _, 78, _], [76, _, 73, _, 69, _, _, _]
+  ];
+  const mtof = m => 440 * Math.pow(2, (m - 69) / 12);
+  function setup() {
+    const AC = window.AudioContext || window.webkitAudioContext;
+    if (!AC) return false;
+    ctx = new AC();
+    master = ctx.createGain(); master.gain.value = 0;
+    const comp = ctx.createDynamicsCompressor(); comp.threshold.value = -18; comp.ratio.value = 3;
+    bus = ctx.createGain();
+    const conv = ctx.createConvolver();
+    const len = ctx.sampleRate * 3.2, buf = ctx.createBuffer(2, len, ctx.sampleRate);
+    for (let ch = 0; ch < 2; ch++) { const d = buf.getChannelData(ch); for (let i = 0; i < len; i++) d[i] = (Math.random() * 2 - 1) * Math.pow(1 - i / len, 2.6); }
+    conv.buffer = buf;
+    const wet = ctx.createGain(); wet.gain.value = 0.5;
+    const dry = ctx.createGain(); dry.gain.value = 0.78;
+    bus.connect(dry); bus.connect(conv); conv.connect(wet);
+    dry.connect(comp); wet.connect(comp); comp.connect(master); master.connect(ctx.destination);
+    return true;
+  }
+  function bell(t, m, vel) {
+    const fq = mtof(m);
+    const g = ctx.createGain(); g.gain.setValueAtTime(0, t); g.gain.linearRampToValueAtTime(vel, t + 0.006); g.gain.exponentialRampToValueAtTime(0.0006, t + 2.4); g.connect(bus);
+    const o = ctx.createOscillator(); o.type = 'sine'; o.frequency.value = fq; o.connect(g);
+    const g2 = ctx.createGain(); g2.gain.setValueAtTime(vel * 0.22, t); g2.gain.exponentialRampToValueAtTime(0.0004, t + 0.7); g2.connect(bus);
+    const o2 = ctx.createOscillator(); o2.type = 'sine'; o2.frequency.value = fq * 3.01; o2.connect(g2);
+    o.start(t); o2.start(t); o.stop(t + 2.5); o2.stop(t + 0.75);
+  }
+  function pad(t, root, q, dur) {
+    const g = ctx.createGain(); g.gain.setValueAtTime(0, t); g.gain.linearRampToValueAtTime(0.022, t + 0.9); g.gain.linearRampToValueAtTime(0, t + dur + 0.5);
+    const lp = ctx.createBiquadFilter(); lp.type = 'lowpass'; lp.frequency.value = 850; lp.connect(g); g.connect(bus);
+    TRI[q].forEach(iv => { const o = ctx.createOscillator(); o.type = 'triangle'; o.frequency.value = mtof(root + 12 + iv); o.detune.value = rand(-6, 6); o.connect(lp); o.start(t); o.stop(t + dur + 0.6); });
+  }
+  function bass(t, m) {
+    const g = ctx.createGain(); g.gain.setValueAtTime(0, t); g.gain.linearRampToValueAtTime(0.16, t + 0.02); g.gain.exponentialRampToValueAtTime(0.0006, t + 1.5); g.connect(bus);
+    const o = ctx.createOscillator(); o.type = 'sine'; o.frequency.value = mtof(m); o.connect(g); o.start(t); o.stop(t + 1.6);
+  }
+  function playStep(i, t) {
+    const bar = Math.floor(i / 8) % 8, slot = i % 8, pass = Math.floor(i / 64) % 2;
+    const [root, q] = CHORDS[bar];
+    if (slot === 0) { pad(t, root, q, EIGHTH * 8); bass(t, root - 12); }
+    if (slot === 4) bass(t, root - 5);
+    bell(t, root + ARP[q][slot], 0.07);
+    const m = MEL[bar][slot];
+    if (m) { if (pass === 0) bell(t, m, 0.2); else if (slot % 4 === 0) bell(t, m, 0.16); }
+    if (pass === 1 && slot === 6 && bar % 2 === 1) bell(t, root + 24 + (q === 'M' ? 4 : 3), 0.06);
+  }
+  function sched() { if (!ctx) return; while (nextT < ctx.currentTime + 0.3) { playStep(step, nextT); nextT += EIGHTH; step++; } }
+  function ui() {
+    btn.classList.toggle('on', on);
+    btn.setAttribute('aria-pressed', on ? 'true' : 'false');
+    label.textContent = on ? 'Tắt nhạc' : 'Bật nhạc';
+    btn.setAttribute('aria-label', on ? 'Tắt nhạc nền' : 'Bật nhạc nền');
+  }
+  function start() {
+    if (on) return;
+    on = true; ui();
+    if (useFile) {
+      audioEl.volume = 0;
+      audioEl.play().then(() => fadeTo(FILE_VOL, 2500)).catch(err => {
+        if (err && err.name === 'NotAllowedError') { on = false; ui(); return; }
+        useFile = false; on = false; start();
+      });
+      return;
+    }
+    if (!ctx && !setup()) { on = false; ui(); return; }
+    ctx.resume().then(() => { if (ctx.state !== 'running') { on = false; ui(); } }, () => { on = false; ui(); });
+    master.gain.cancelScheduledValues(ctx.currentTime);
+    master.gain.setTargetAtTime(0.55, ctx.currentTime, 0.8);
+    nextT = Math.max(nextT, ctx.currentTime + 0.12);
+    if (!timer) timer = setInterval(sched, 60);
+  }
+  function stop() {
+    on = false; ui();
+    if (audioEl && useFile) fadeTo(0, 600, () => { if (!on) audioEl.pause(); });
+    if (ctx) {
+      master.gain.cancelScheduledValues(ctx.currentTime);
+      master.gain.setTargetAtTime(0, ctx.currentTime, 0.25);
+      setTimeout(() => { if (!on) { clearInterval(timer); timer = null; ctx.suspend(); } }, 900);
+    }
+  }
+  // Trình duyệt chỉ cho phát nhạc có tiếng sau một thao tác của người xem.
+  // Trang thử phát ngay khi mở; nếu bị chặn, lần chạm/gõ phím nào tiếp theo cũng sẽ bật nhạc,
+  // trừ khi người xem đã tự tắt nhạc bằng nút.
+  btn.addEventListener('click', () => { userOff = on; on ? stop() : start(); });
+  const kick = e => {
+    if (userOff || on) return;
+    if (e.target && e.target.closest && e.target.closest('#musicBtn')) return;
+    start();
+  };
+  ['pointerdown', 'pointerup', 'touchend', 'click', 'keydown'].forEach(t => addEventListener(t, kick, { capture: true }));
+  document.addEventListener('visibilitychange', () => {
+    if (!on) return;
+    if (document.hidden) { ctx && ctx.suspend(); if (audioEl && useFile) audioEl.pause(); }
+    else { if (ctx) { ctx.resume(); nextT = Math.max(nextT, ctx.currentTime + 0.1); } if (audioEl && useFile) audioEl.play().catch(() => {}); }
+  });
+  ui();
+  return { start, stop, get on() { return on; } };
+}
+
+/* ---------------- cảnh 3D (Three.js) ---------------- */
+function initThree() {
+  if (!window.THREE) return null;
+  const T = THREE;
+  const canvas = $('#scene');
+  let renderer;
+  try { renderer = new T.WebGLRenderer({ canvas, antialias: true, alpha: true, powerPreference: 'high-performance' }); }
+  catch (e) { return null; }
+  renderer.setPixelRatio(Math.min(devicePixelRatio || 1, SMALL ? 1.75 : 2));
+  renderer.setClearColor(0x000000, 0);
+  const scene = new T.Scene();
+  const camera = new T.PerspectiveCamera(40, innerWidth / innerHeight, 0.1, 100);
+  camera.position.set(0, 0, 12);
+
+  /* ánh sáng & môi trường phản chiếu */
+  const envScene = new T.Scene();
+  {
+    const geo = new T.SphereGeometry(20, 32, 16), cols = [], p = geo.attributes.position;
+    const top = new T.Color(0xdfe8ff).multiplyScalar(0.55), mid = new T.Color(0xffe4ef).multiplyScalar(0.5), bot = new T.Color(0xff9cc2).multiplyScalar(0.45);
+    for (let i = 0; i < p.count; i++) { const y = p.getY(i) / 20; const c = y > 0 ? mid.clone().lerp(top, y) : mid.clone().lerp(bot, -y); cols.push(c.r, c.g, c.b); }
+    geo.setAttribute('color', new T.Float32BufferAttribute(cols, 3));
+    envScene.add(new T.Mesh(geo, new T.MeshBasicMaterial({ vertexColors: true, side: T.BackSide })));
+    const panel = (x, y, z, w, h, c) => { const m = new T.Mesh(new T.PlaneGeometry(w, h), new T.MeshBasicMaterial({ color: c, side: T.DoubleSide })); m.position.set(x, y, z); m.lookAt(0, 0, 0); envScene.add(m); };
+    panel(6, 10, 8, 10, 6, new T.Color(2.2, 2.2, 2.2));
+    panel(-12, 2, 4, 4, 10, new T.Color(1.0, 0.8, 0.9));
+    panel(0, -4, 14, 14, 3, new T.Color(0.8, 0.6, 0.7));
+  }
+  const pmrem = new T.PMREMGenerator(renderer);
+  scene.environment = pmrem.fromScene(envScene, 0.04).texture;
+  scene.add(new T.HemisphereLight(0xfff4fa, 0xffc4da, 0.3));
+  const key = new T.DirectionalLight(0xffffff, 0.6); key.position.set(4, 7, 8); scene.add(key);
+  const rim = new T.PointLight(0xff8fc0, 0.6, 30); rim.position.set(-6, -1, 5); scene.add(rim);
+  const flash = new T.PointLight(0xffe6f0, 0, 16); flash.position.set(0, 0, 4); scene.add(flash);
+
+  /* texture vẽ bằng canvas */
+  function canvasTex(w, h, draw) { const c = document.createElement('canvas'); c.width = w; c.height = h; draw(c.getContext('2d')); const t = new T.CanvasTexture(c); t.anisotropy = 4; return t; }
+  const petalTex = canvasTex(128, 160, g => {
+    g.beginPath(); g.moveTo(64, 158);
+    g.bezierCurveTo(10, 122, 0, 40, 34, 12); g.bezierCurveTo(48, 0, 58, 6, 64, 18); g.bezierCurveTo(70, 6, 80, 0, 94, 12); g.bezierCurveTo(128, 40, 118, 122, 64, 158);
+    g.closePath();
+    const grd = g.createRadialGradient(64, 150, 4, 64, 80, 120);
+    grd.addColorStop(0, '#fff2d6'); grd.addColorStop(0.28, '#ffffff'); grd.addColorStop(1, '#ffe3ec');
+    g.fillStyle = grd; g.fill();
+    g.save(); g.clip(); g.lineWidth = 1.1; g.strokeStyle = 'rgba(255,170,200,.22)';
+    for (let i = -3; i <= 3; i++) { g.beginPath(); g.moveTo(64, 158); g.quadraticCurveTo(64 + i * 14, 90, 64 + i * 22, 8); g.stroke(); }
+    g.restore();
+  });
+  const glowTex = canvasTex(128, 128, g => { const grd = g.createRadialGradient(64, 64, 0, 64, 64, 64); grd.addColorStop(0, 'rgba(255,240,246,1)'); grd.addColorStop(0.35, 'rgba(255,180,210,.45)'); grd.addColorStop(1, 'rgba(255,180,210,0)'); g.fillStyle = grd; g.fillRect(0, 0, 128, 128); });
+
+  /* hình học dùng chung */
+  const bendZ = (nx, ny, w, h, o) => -o.cup * nx * nx * w * 0.5 + o.curl * ny * ny * ny * h + o.roll * Math.pow(Math.abs(nx), 3) * ny * ny * w * 0.5 + o.wave * Math.sin(nx * 7 + ny * 4) * ny * h * 0.04;
+  function bentPlane(w, h, o, seg) {
+    const opt = Object.assign({ cup: 0, curl: 0, roll: 0, wave: 0 }, o);
+    const g = new T.PlaneGeometry(w, h, seg, seg); g.translate(0, h / 2, 0);
+    const p = g.attributes.position;
+    for (let i = 0; i < p.count; i++) p.setZ(i, bendZ(p.getX(i) / (w / 2), p.getY(i) / h, w, h, opt));
+    g.computeVertexNormals(); return g;
+  }
+  function heartGeometry() {
+    const s = new T.Shape();
+    s.moveTo(25, 25); s.bezierCurveTo(25, 25, 20, 0, 0, 0); s.bezierCurveTo(-30, 0, -30, 35, -30, 35); s.bezierCurveTo(-30, 55, -10, 77, 25, 95);
+    s.bezierCurveTo(60, 77, 80, 55, 80, 35); s.bezierCurveTo(80, 35, 80, 0, 50, 0); s.bezierCurveTo(35, 0, 25, 25, 25, 25);
+    const g = new T.ExtrudeGeometry(s, { depth: 14, bevelEnabled: true, bevelSegments: 8, bevelSize: 9, bevelThickness: 12, curveSegments: 32 });
+    g.rotateZ(Math.PI); g.center(); g.computeBoundingBox();
+    const h = g.boundingBox.max.y - g.boundingBox.min.y; g.scale(1 / h, 1 / h, 1 / h);
+    return g;
+  }
+  function roundedBox(w, h, d, r, b) {
+    const s = new T.Shape(), x = -(w - 2 * b) / 2, y = -(d - 2 * b) / 2, W = w - 2 * b, D = d - 2 * b;
+    s.moveTo(x + r, y); s.lineTo(x + W - r, y); s.quadraticCurveTo(x + W, y, x + W, y + r); s.lineTo(x + W, y + D - r); s.quadraticCurveTo(x + W, y + D, x + W - r, y + D);
+    s.lineTo(x + r, y + D); s.quadraticCurveTo(x, y + D, x, y + D - r); s.lineTo(x, y + r); s.quadraticCurveTo(x, y, x + r, y);
+    const g = new T.ExtrudeGeometry(s, { depth: h - 2 * b, bevelEnabled: true, bevelThickness: b, bevelSize: b, bevelSegments: 4, curveSegments: 8 });
+    g.rotateX(-Math.PI / 2); g.center(); return g;
+  }
+  const heartGeo = heartGeometry();
+  const glossy = color => new T.MeshPhysicalMaterial({ color, roughness: 0.16, metalness: 0.02, clearcoat: 1, clearcoatRoughness: 0.08, envMapIntensity: 1 });
+
+  /* chất liệu pha lê: kính bóng nhiều mặt cắt + viền sáng ánh cầu vồng */
+  const petalShape = g => {
+    g.beginPath(); g.moveTo(128, 318);
+    g.bezierCurveTo(26, 262, -6, 110, 40, 44); g.bezierCurveTo(70, 4, 104, 14, 128, 10);
+    g.bezierCurveTo(152, 14, 186, 4, 216, 44); g.bezierCurveTo(262, 110, 230, 262, 128, 318); g.closePath();
+  };
+  const crystalTex = canvasTex(256, 320, g => {
+    petalShape(g);
+    const grd = g.createLinearGradient(0, 320, 0, 0);
+    grd.addColorStop(0, '#ffffff'); grd.addColorStop(0.5, '#fff0f6'); grd.addColorStop(1, '#ffd9e8');
+    g.fillStyle = grd; g.fill();
+    g.save(); g.clip();
+    g.lineWidth = 12; g.strokeStyle = 'rgba(255,255,255,.95)'; g.shadowColor = '#ffffff'; g.shadowBlur = 20; g.stroke();
+    g.shadowBlur = 0; g.lineWidth = 2; g.strokeStyle = 'rgba(255,255,255,.75)';
+    for (let i = -3; i <= 3; i++) { g.beginPath(); g.moveTo(128, 318); g.quadraticCurveTo(128 + i * 18, 170, 128 + i * 26, 20); g.stroke(); }
+    g.restore();
+  });
+  const crystalLeafTex = canvasTex(96, 192, g => {
+    g.beginPath(); g.moveTo(48, 190); g.bezierCurveTo(2, 150, 4, 48, 48, 2); g.bezierCurveTo(92, 48, 94, 150, 48, 190); g.closePath();
+    const grd = g.createLinearGradient(0, 0, 96, 0); grd.addColorStop(0, '#d4fbe9'); grd.addColorStop(0.5, '#ffffff'); grd.addColorStop(1, '#d4fbe9');
+    g.fillStyle = grd; g.fill();
+    g.save(); g.clip();
+    g.lineWidth = 7; g.strokeStyle = '#ffffff'; g.shadowColor = '#ffffff'; g.shadowBlur = 12; g.stroke(); g.shadowBlur = 0;
+    g.lineWidth = 2.5; g.beginPath(); g.moveTo(48, 188); g.lineTo(48, 10); g.stroke();
+    g.restore();
+  });
+  const crystal = (color, o) => new T.MeshPhysicalMaterial(Object.assign({
+    color, emissive: new T.Color(color).multiplyScalar(0.4), metalness: 0, roughness: 0.05, clearcoat: 1, clearcoatRoughness: 0.03, reflectivity: 0.6, envMapIntensity: 1.3,
+    transparent: true, opacity: 0.72, flatShading: true, side: T.DoubleSide, depthWrite: false
+  }, o || {}));
+  const rimMats = [];
+  function rimMaterial(map, color, power) {
+    const m = new T.ShaderMaterial({
+      uniforms: { uMap: { value: map || null }, uUseMap: { value: map ? 1 : 0 }, uColor: { value: new T.Color(color) }, uTime: { value: 0 }, uBoost: { value: 0 }, uPower: { value: power || 2.2 } },
+      vertexShader: `varying vec3 vN; varying vec3 vV; varying vec2 vUv;
+        void main(){ vUv = uv; vec4 mv = modelViewMatrix * vec4(position, 1.0); vN = normalize(normalMatrix * normal); vV = normalize(-mv.xyz); gl_Position = projectionMatrix * mv; }`,
+      fragmentShader: `uniform sampler2D uMap; uniform float uUseMap; uniform vec3 uColor; uniform float uTime; uniform float uBoost; uniform float uPower;
+        varying vec3 vN; varying vec3 vV; varying vec2 vUv;
+        void main(){
+          if (uUseMap > 0.5 && texture2D(uMap, vUv).a < 0.5) discard;
+          float f = pow(1.0 - abs(dot(normalize(vN), normalize(vV))), uPower);
+          vec3 irid = 0.5 + 0.5 * cos(6.2831 * (f * 1.3 + vec3(0.0, 0.33, 0.67)) + uTime * 0.4);
+          gl_FragColor = vec4(mix(uColor, irid, 0.3) * f * (0.3 + uBoost * 0.7), 1.0);
+        }`,
+      transparent: true, depthWrite: false, blending: T.AdditiveBlending, side: T.DoubleSide
+    });
+    rimMats.push(m); return m;
+  }
+
+  function vis(z) { const h = 2 * Math.tan(T.MathUtils.degToRad(camera.fov / 2)) * (camera.position.z - z); return { h, w: h * camera.aspect }; }
+  function slotFit(id, w, h, maxS, bias) {
+    const r = document.getElementById(id).getBoundingClientRect(), V = vis(0);
+    const sh = r.height / innerHeight * V.h, sw = Math.min(r.width / innerWidth * V.w, V.w * 0.94);
+    const x = ((r.left + r.width / 2) / innerWidth * 2 - 1) * V.w / 2;
+    const y = -((r.top + r.height / 2) / innerHeight * 2 - 1) * V.h / 2 + (bias || 0) * sh;
+    return { x, y, s: Math.max(0.32, Math.min(maxS, sh / h, sw / w)) };
+  }
+
+  /* ---- trái tim ở màn nhập tên ---- */
+  const hero = new T.Group(); scene.add(hero);
+  const heroHeart = new T.Mesh(heartGeo, crystal(0xf0307a, { opacity: 0.9, flatShading: false, side: T.FrontSide, depthWrite: true })); heroHeart.scale.setScalar(1.25); hero.add(heroHeart);
+  heroHeart.add(new T.Mesh(heartGeo, rimMaterial(null, 0xffc2dc, 1.6)));
+  const heroGlow = new T.Sprite(new T.SpriteMaterial({ map: glowTex, color: 0xff9cc4, transparent: true, blending: T.AdditiveBlending, depthWrite: false, opacity: 0.4 }));
+  heroGlow.position.z = -0.6; heroGlow.scale.setScalar(3.6); hero.add(heroGlow);
+  const ringMat = new T.MeshPhysicalMaterial({ color: 0xffffff, roughness: 0.08, metalness: 0.85, clearcoat: 1, envMapIntensity: 1.6 });
+  const ring1 = new T.Mesh(new T.TorusGeometry(1.15, 0.022, 12, 160), ringMat); ring1.rotation.set(1.25, 0.25, 0); hero.add(ring1);
+  const ring2 = new T.Mesh(new T.TorusGeometry(1.34, 0.012, 8, 160), ringMat); ring2.rotation.set(1.45, -0.35, 0); hero.add(ring2);
+  const orbitTilt = new T.Group(); orbitTilt.rotation.copy(ring1.rotation); hero.add(orbitTilt);
+  const orbit = new T.Group(); orbitTilt.add(orbit);
+  const pearlMat = glossy(0xfff3f8);
+  for (let i = 0; i < 3; i++) { const a = i / 3 * Math.PI * 2; const p = new T.Mesh(new T.SphereGeometry(0.065, 20, 14), pearlMat); p.position.set(Math.cos(a) * 1.15, Math.sin(a) * 1.15, 0); orbit.add(p); }
+  hero.userData = { vis: 0, spin: 0, base: { x: 0, y: 0, s: 1 } };
+
+  /* ---- hộp quà ---- */
+  const gift = new T.Group(); scene.add(gift);
+  const giftInner = new T.Group(); giftInner.position.y = -0.42; gift.add(giftInner);
+  const boxMat = new T.MeshPhysicalMaterial({ color: 0xffa9c8, roughness: 0.38, clearcoat: 0.7, clearcoatRoughness: 0.25, transparent: true });
+  const ribMat = new T.MeshPhysicalMaterial({ color: 0xfff6fa, roughness: 0.22, metalness: 0.12, clearcoat: 1, transparent: true });
+  const lidMat = boxMat.clone(), lidRibMat = ribMat.clone();
+  const body = new T.Group(); giftInner.add(body);
+  body.add(new T.Mesh(roundedBox(2, 1.5, 2, 0.08, 0.05), boxMat));
+  body.add(new T.Mesh(new T.BoxGeometry(0.34, 1.52, 2.02), ribMat));
+  body.add(new T.Mesh(new T.BoxGeometry(2.02, 1.52, 0.34), ribMat));
+  const lid = new T.Group(); const LID_Y = 0.88; lid.position.y = LID_Y; giftInner.add(lid);
+  lid.add(new T.Mesh(roundedBox(2.16, 0.42, 2.16, 0.08, 0.05), lidMat));
+  lid.add(new T.Mesh(new T.BoxGeometry(0.34, 0.44, 2.18), lidRibMat));
+  lid.add(new T.Mesh(new T.BoxGeometry(2.18, 0.44, 0.34), lidRibMat));
+  const loopGeo = new T.TorusGeometry(0.27, 0.08, 14, 40);
+  [[1, 0], [-1, 0], [1, Math.PI / 2], [-1, Math.PI / 2]].forEach(([side, ry]) => {
+    const holder = new T.Group(); holder.rotation.y = ry; holder.position.y = 0.21; lid.add(holder);
+    const l = new T.Mesh(loopGeo, lidRibMat); l.position.set(side * 0.27, 0.2, 0); l.rotation.set(0, side * 0.35, side * -0.5); l.scale.set(1, 0.72, 0.9); holder.add(l);
+  });
+  const knot = new T.Mesh(new T.SphereGeometry(0.13, 20, 14), lidRibMat); knot.position.y = 0.3; knot.scale.set(1, 0.8, 1); lid.add(knot);
+  gift.userData = { appear: 0, lid: 0, gone: 0, shake: 0, base: { x: 0, y: 0, s: 1 } };
+  const giftGlow = new T.Sprite(new T.SpriteMaterial({ map: glowTex, color: 0xffc2d8, transparent: true, blending: T.AdditiveBlending, depthWrite: false, opacity: 0 }));
+  scene.add(giftGlow);
+
+  /* ---- đóa hồng pha lê, tương tác được ---- */
+  const leafMat = crystal(0x3fb37c, { map: crystalLeafTex, alphaTest: 0.5, opacity: 0.86 });
+  const leafRim = rimMaterial(crystalLeafTex, 0xa8f0cc, 3.0);
+  const roseRoot = new T.Group(); scene.add(roseRoot);
+  const roseSpin = new T.Group(); roseRoot.add(roseSpin);
+  const head = new T.Group(); roseSpin.add(head);
+  const BR_N = 46, brPetals = [];
+  const roseMats = [0xd8125a, 0xec2a70, 0xf83f84, 0xff5b98].map((c, k) => crystal(c, { map: crystalTex, alphaTest: 0.5, opacity: 0.93 - k * 0.05 }));
+  const petalRim = rimMaterial(crystalTex, 0xffa8d0, 3.0);
+  const glintMat = new T.ShaderMaterial({
+    uniforms: { uTime: { value: 0 }, uPR: { value: renderer.getPixelRatio() }, uBoost: { value: 0 } },
+    vertexShader: `attribute float aPhase; attribute float aSize; uniform float uTime; uniform float uPR; uniform float uBoost; varying float vA;
+      void main(){ vec4 mv = modelViewMatrix * vec4(position, 1.0); gl_Position = projectionMatrix * mv;
+        float s = sin(uTime * (1.1 + aPhase * 1.7) + aPhase * 40.0); float tw = pow(max(0.0, s), 6.0);
+        vA = clamp(tw + uBoost * 0.85, 0.0, 1.0);
+        gl_PointSize = aSize * uPR * (0.2 + 1.1 * vA) * (12.0 / -mv.z); }`,
+    fragmentShader: `varying float vA;
+      void main(){ vec2 p = gl_PointCoord - 0.5; float d = length(p);
+        float core = pow(smoothstep(0.5, 0.0, d), 4.0);
+        float rays = max(0.0, 1.0 - abs(p.x) * 22.0) * smoothstep(0.5, 0.0, abs(p.y)) + max(0.0, 1.0 - abs(p.y) * 22.0) * smoothstep(0.5, 0.0, abs(p.x));
+        vec2 q = vec2(p.x + p.y, p.x - p.y) * 0.7071;
+        float diag = (max(0.0, 1.0 - abs(q.x) * 30.0) * smoothstep(0.35, 0.0, abs(q.y)) + max(0.0, 1.0 - abs(q.y) * 30.0) * smoothstep(0.35, 0.0, abs(q.x))) * 0.5;
+        float a = (core + rays + diag) * vA; if (a < 0.01) discard;
+        gl_FragColor = vec4(1.0, 0.97, 0.99, a); }`,
+    transparent: true, depthWrite: false, blending: T.AdditiveBlending
+  });
+  for (let i = 0; i < BR_N; i++) {
+    const t = i / (BR_N - 1), h = 0.28 + t * 0.72, w = h * (0.85 + t * 0.5);
+    const opt = { cup: 1.15 - t * 0.5, curl: 0.04 + t * t * 0.38, roll: t * t * 0.75, wave: t };
+    const geo = bentPlane(w, h, opt, 6);
+    const pv = new T.Group(); pv.rotation.y = i * 2.39996 + rand(-0.06, 0.06);
+    const m = new T.Mesh(geo, roseMats[Math.min(3, Math.floor(t * 4))]);
+    m.position.set(0, -t * 0.12, 0.02 + t * 0.24);
+    m.add(new T.Mesh(geo, petalRim));
+    if (t > 0.3) {
+      const n = 3, pos = new Float32Array(n * 3), ph = new Float32Array(n), sz = new Float32Array(n);
+      for (let k = 0; k < n; k++) {
+        const nx = rand(-0.6, 0.6), ny = rand(0.3, 0.92);
+        pos[k * 3] = nx * w / 2; pos[k * 3 + 1] = ny * h; pos[k * 3 + 2] = bendZ(nx, ny, w, h, opt) + 0.01;
+        ph[k] = Math.random(); sz[k] = rand(22, 42);
+      }
+      const gg = new T.BufferGeometry();
+      gg.setAttribute('position', new T.BufferAttribute(pos, 3)); gg.setAttribute('aPhase', new T.BufferAttribute(ph, 1)); gg.setAttribute('aSize', new T.BufferAttribute(sz, 1));
+      m.add(new T.Points(gg, glintMat));
+    }
+    pv.add(m); head.add(pv);
+    brPetals.push({ m, t, w, h, opt, ph: rand(0, 6.28) });
+  }
+  const core = new T.Mesh(new T.IcosahedronGeometry(0.13, 0), crystal(0xc40f50, { opacity: 0.95, side: T.FrontSide }));
+  core.scale.set(1, 1.4, 1); core.position.y = 0.14; head.add(core);
+  const coreGlow = new T.Sprite(new T.SpriteMaterial({ map: glowTex, color: 0xffd0e4, transparent: true, blending: T.AdditiveBlending, depthWrite: false, opacity: 0.8 }));
+  coreGlow.position.y = 0.3; coreGlow.scale.setScalar(0.8); head.add(coreGlow);
+  const sepalGeo = bentPlane(0.2, 0.6, { cup: 0.4, curl: 0.3 }, 4);
+  for (let k = 0; k < 5; k++) { const pv = new T.Group(); pv.rotation.y = k * 1.2566 + 0.3; const s = new T.Mesh(sepalGeo, leafMat); s.position.set(0, -0.08, 0.1); s.rotation.x = 2.05; pv.add(s); head.add(pv); }
+  // thân & lá pha lê
+  const stemCurve = new T.CatmullRomCurve3([new T.Vector3(0, -0.05, 0), new T.Vector3(0.06, -0.9, 0.04), new T.Vector3(-0.05, -1.9, -0.02), new T.Vector3(0.03, -3.2, 0.03)]);
+  const stemGeo = new T.TubeGeometry(stemCurve, 48, 0.06, 8, false);
+  const stem = new T.Mesh(stemGeo, crystal(0x52bf8a, { opacity: 0.82, side: T.FrontSide }));
+  stem.add(new T.Mesh(stemGeo, rimMaterial(null, 0xe6fff3, 1.6)));
+  roseSpin.add(stem);
+  const stemLeaves = [];
+  const bigLeafGeo = bentPlane(0.62, 1.3, { cup: 0.6, curl: 0.18, wave: 0.6 }, 5);
+  [[0.36, -1.0, 0.5, 1], [0.58, 1.1, -0.4, 0.85], [0.47, -1.35, 2.2, 0.6]].forEach(([u, rz, ry, s]) => {
+    const pv = new T.Group(); pv.position.copy(stemCurve.getPoint(u)); pv.rotation.set(0, ry, rz); roseSpin.add(pv);
+    const m = new T.Mesh(bigLeafGeo, leafMat); m.scale.setScalar(s); m.rotation.x = 0.35; m.add(new T.Mesh(bigLeafGeo, leafRim)); pv.add(m);
+    stemLeaves.push({ pv, rz, ph: rand(0, 6.28) });
+  });
+  // ánh sáng quét quanh hoa để các mặt cắt lấp lánh
+  const sweep = new T.PointLight(0xffffff, 0.8, 7); roseRoot.add(sweep);
+  // quầng sáng
+  const roseGlow = new T.Sprite(new T.SpriteMaterial({ map: glowTex, color: 0xffb3cf, transparent: true, blending: T.AdditiveBlending, depthWrite: false, opacity: 0 }));
+  roseGlow.position.set(0, 0.1, -1); roseGlow.scale.setScalar(6); roseRoot.add(roseGlow);
+  roseRoot.userData = { rise: 0, bloom: 0, away: 0, pulse: 0, boost: 0, base: { x: 0, y: 0, s: 1 }, cur: null };
+  roseRoot.visible = false;
+  const ctl = { rotX: 0, rotY: 0, vx: 0, vy: 0, drag: false, lx: 0, ly: 0, moved: 0 };
+
+  /* ---- cánh hoa rơi ---- */
+  const PET_N = REDUCED ? 30 : (SMALL ? 70 : 120);
+  const petGeo = bentPlane(0.3, 0.36, { cup: 0.6, curl: 0.3 }, 4); petGeo.translate(0, -0.18, 0);
+  const petals = new T.InstancedMesh(petGeo, new T.MeshStandardMaterial({ map: petalTex, side: T.DoubleSide, alphaTest: 0.45, roughness: 0.55 }), PET_N);
+  petals.instanceMatrix.setUsage(T.DynamicDrawUsage);
+  const petCols = [0xffb3cb, 0xff8fb3, 0xffd6e2, 0xffffff, 0xffc4d6, 0xf7a1c4].map(c => new T.Color(c));
+  const pd = [];
+  function spawn(p, anywhere) {
+    p.z = rand(-8, 3.5); const V = vis(p.z);
+    p.x = rand(-0.55, 0.55) * V.w; p.y = anywhere ? rand(-0.5, 0.5) * V.h : V.h / 2 + rand(0.3, 2);
+    p.vy = rand(0.35, 0.8); p.bx = 0; p.by = 0; p.sw = rand(0.3, 1); p.ph = rand(0, 6.28);
+    p.rx = rand(0, 6.28); p.ry = rand(0, 6.28); p.rz = rand(0, 6.28);
+    p.sx = rand(-1.4, 1.4); p.sy = rand(-1.2, 1.2); p.s = rand(0.7, 1.3); return p;
+  }
+  for (let i = 0; i < PET_N; i++) { pd.push(spawn({}, true)); petals.setColorAt(i, petCols[i % petCols.length]); }
+  scene.add(petals);
+  const dummy = new T.Object3D();
+  function petalBurst(ox, oy, power) {
+    for (const p of pd) {
+      const dx = p.x - ox, dy = p.y - oy, d = Math.hypot(dx, dy) + 0.6, k = Math.max(0, 1 - d / 9);
+      p.bx += dx / d * power * k * rand(0.6, 1.2); p.by += (dy / d * power * 0.8 + power * 0.5) * k * rand(0.6, 1.2);
+    }
+  }
+
+  /* ---- tim bóng trôi nền ---- */
+  const fMats = [glossy(0xff8fb8), glossy(0xfff0f5), glossy(0xebcfff), glossy(0xffa9c9)];
+  const floaters = [];
+  for (let i = 0; i < (SMALL ? 4 : 6); i++) {
+    const m = new T.Mesh(heartGeo, fMats[i % 4]);
+    m.userData = { fx: (i % 2 ? 1 : -1) * rand(0.28, 0.48), fy: rand(-0.42, 0.42), z: rand(-9, -4), s: rand(0.45, 0.85), ph: rand(0, 6.28), sp: rand(0.5, 0.9), dir: i % 3 ? 1 : -1 };
+    m.position.z = m.userData.z; m.scale.setScalar(m.userData.s);
+    scene.add(m); floaters.push(m);
+  }
+
+  /* ---- lấp lánh ---- */
+  function sparkleMaterial(color) {
+    return new T.ShaderMaterial({
+      uniforms: { uTime: { value: 0 }, uPR: { value: renderer.getPixelRatio() }, uColor: { value: new T.Color(color) }, uBoost: { value: 0 } },
+      vertexShader: `attribute float aSize; attribute float aPhase; uniform float uTime; uniform float uPR; uniform float uBoost; varying float vA;
+        void main(){ vec4 mv = modelViewMatrix * vec4(position,1.0); gl_Position = projectionMatrix * mv;
+          float tw = 0.5 + 0.5 * sin(uTime * 1.8 + aPhase * 6.2831); vA = min(1.0, tw * tw + uBoost);
+          gl_PointSize = aSize * uPR * (0.5 + 0.7 * tw + uBoost) * (12.0 / -mv.z); }`,
+      fragmentShader: `uniform vec3 uColor; varying float vA;
+        void main(){ vec2 p = gl_PointCoord - 0.5; float d = length(p);
+          float core = pow(smoothstep(0.5, 0.0, d), 3.0);
+          float cr = max(0.0, 1.0 - abs(p.x) * 16.0) * smoothstep(0.5, 0.0, abs(p.y)) + max(0.0, 1.0 - abs(p.y) * 16.0) * smoothstep(0.5, 0.0, abs(p.x));
+          gl_FragColor = vec4(uColor, (core + cr * 0.55) * vA); }`,
+      transparent: true, depthWrite: false, blending: T.AdditiveBlending
+    });
+  }
+  function sparkleCloud(n, place, sizeA, sizeB, color) {
+    const geo = new T.BufferGeometry(), pos = new Float32Array(n * 3), size = new Float32Array(n), ph = new Float32Array(n);
+    for (let i = 0; i < n; i++) { const v = place(i); pos[i * 3] = v[0]; pos[i * 3 + 1] = v[1]; pos[i * 3 + 2] = v[2]; size[i] = rand(sizeA, sizeB); ph[i] = Math.random(); }
+    geo.setAttribute('position', new T.BufferAttribute(pos, 3));
+    geo.setAttribute('aSize', new T.BufferAttribute(size, 1));
+    geo.setAttribute('aPhase', new T.BufferAttribute(ph, 1));
+    return new T.Points(geo, sparkleMaterial(color));
+  }
+  const sparkles = sparkleCloud(SMALL ? 150 : 240, () => [rand(-12, 12), rand(-7, 7), rand(-12, 2)], 5, 14, 0xfff2c9);
+  scene.add(sparkles);
+  const goldDust = sparkleCloud(SMALL ? 110 : 170, () => { const a = rand(0, 6.28), r = rand(1.25, 2.3); return [Math.cos(a) * r, rand(-1.2, 1.1), Math.sin(a) * r]; }, 3, 10, 0xffd27a);
+  roseRoot.add(goldDust);
+
+  /* ---- pháo tim ---- */
+  const pool = [];
+  for (let i = 0; i < 30; i++) {
+    const mat = fMats[i % 4].clone(); mat.transparent = true;
+    const m = new T.Mesh(heartGeo, mat); m.visible = false; scene.add(m);
+    pool.push({ m, v: new T.Vector3(), life: 0, g: 3.2, spin: new T.Vector3() });
+  }
+  function heartBurst(o, n, power, opts) {
+    const o2 = opts || {}; let k = 0;
+    for (const h of pool) {
+      if (k >= n) break; if (h.life > 0) continue; k++;
+      h.m.position.set(o.x + (o2.spread ? rand(-o2.spread, o2.spread) : 0), o.y, o.z + rand(0, 0.5));
+      h.v.set(rand(-1, 1), rand(0.5, 1.4), rand(-0.3, 0.9)).normalize().multiplyScalar(power * rand(0.55, 1));
+      if (o2.up) h.v.set(rand(-0.4, 0.4), rand(1.2, 2.4), rand(-0.2, 0.4));
+      h.g = o2.up ? -0.25 : 3.2; h.life = rand(1.6, 2.6);
+      h.spin.set(rand(-3, 3), rand(-4, 4), rand(-2, 2)); h.m.visible = true; h.m.scale.setScalar(rand(0.14, 0.3) * (o2.scale || 1));
+    }
+  }
+
+  /* ---- tween ---- */
+  let NOW = 0;
+  const tweens = [];
+  const E = {
+    inOut: t => t < .5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2,
+    out: t => 1 - Math.pow(1 - t, 3), in: t => t * t * t,
+    back: t => { const c1 = 1.70158, c3 = c1 + 1; return 1 + c3 * Math.pow(t - 1, 3) + c1 * Math.pow(t - 1, 2); },
+    sine: t => -(Math.cos(Math.PI * t) - 1) / 2
+  };
+  const tween = (dur, fn, ease = E.inOut, delay = 0) => new Promise(res => tweens.push({ start: NOW + delay, dur: REDUCED ? Math.min(dur, 0.35) : dur, fn, ease, res }));
+  function runTweens() {
+    for (let i = tweens.length - 1; i >= 0; i--) {
+      const tw = tweens[i], p = (NOW - tw.start) / tw.dur;
+      if (p < 0) continue;
+      const c = Math.min(1, p); tw.fn(tw.ease(c));
+      if (c >= 1) { tweens.splice(i, 1); tw.res(); }
+    }
+  }
+  const flashUp = (k = 2.4) => tween(1.1, p => { flash.intensity = Math.sin(p * Math.PI) * k; }, E.out);
+  const setOpacity = (mats, o) => mats.forEach(m => { m.opacity = o; m.depthWrite = o > 0.98; });
+
+  /* ---- chạm vào đóa hồng ---- */
+  function rosePulse() {
+    const ru = roseRoot.userData;
+    if (ru.rise < 0.9) return;
+    tween(1.5, p => { ru.pulse = Math.sin(p * Math.PI) * (1 - p * 0.3); }, E.out);
+    tween(1.8, p => { ru.boost = 1 - p; }, E.out);
+    flashUp(1.8);
+    const o = new T.Vector3(); head.getWorldPosition(o);
+    heartBurst(o, 12, 3.8, { scale: 0.8 }); petalBurst(o.x, o.y, 4.5);
+  }
+  function bindTouch(el, onTap) {
+    el.addEventListener('pointerdown', e => {
+      ctl.drag = true; ctl.lx = e.clientX; ctl.ly = e.clientY; ctl.moved = 0; ctl.vx = ctl.vy = 0;
+      try { el.setPointerCapture(e.pointerId); } catch (err) { /* bỏ qua */ }
+    });
+    el.addEventListener('pointermove', e => {
+      if (!ctl.drag) return;
+      const dx = e.clientX - ctl.lx, dy = e.clientY - ctl.ly; ctl.lx = e.clientX; ctl.ly = e.clientY;
+      ctl.moved += Math.abs(dx) + Math.abs(dy);
+      ctl.vy = dx * 0.011; ctl.vx = dy * 0.007;
+      ctl.rotY += ctl.vy; ctl.rotX = clamp(ctl.rotX + ctl.vx, -0.8, 0.7);
+    });
+    el.addEventListener('pointerup', () => { if (!ctl.drag) return; ctl.drag = false; if (ctl.moved < 8) onTap(); });
+    el.addEventListener('pointercancel', () => { ctl.drag = false; });
+    el.addEventListener('keydown', e => {
+      const k = e.key;
+      if (k === 'ArrowLeft' || k === 'ArrowRight') { ctl.vy = (k === 'ArrowLeft' ? -1 : 1) * 0.09; e.preventDefault(); }
+      else if (k === 'ArrowUp' || k === 'ArrowDown') { ctl.rotX = clamp(ctl.rotX + (k === 'ArrowUp' ? -0.15 : 0.15), -0.8, 0.7); e.preventDefault(); }
+      else if (k === 'Enter' || k === ' ') { onTap(); e.preventDefault(); }
+    });
+  }
+
+  /* ---- bố cục theo khung HTML ---- */
+  function layout() {
+    renderer.setSize(innerWidth, innerHeight, false);
+    camera.aspect = innerWidth / innerHeight; camera.updateProjectionMatrix();
+    hero.userData.base = slotFit('heroSlot', 2.9, 2.3, 2.1);
+    gift.userData.base = slotFit('giftSlot', 3.0, 2.7, 1.25);
+    roseRoot.userData.base = slotFit(S.screen === 'finale' ? 'finaleSlot' : 'roseSlot', 2.8, 2.7, 2.0, 0.08);
+    if (!roseRoot.userData.cur) roseRoot.userData.cur = Object.assign({}, roseRoot.userData.base);
+    for (const m of floaters) { const u = m.userData, V = vis(u.z); m.position.x = u.fx * V.w; u.by = u.fy * V.h; }
+  }
+  addEventListener('resize', layout);
+  layout();
+
+  /* ---- vòng lặp ---- */
+  const clock = new T.Clock();
+  let pr = renderer.getPixelRatio(), activePet = PET_N, perfStart = performance.now(), perfN = 0, perfWarm = 2;
+  function adaptQuality() {
+    perfN++;
+    const pn = performance.now(), span = pn - perfStart;
+    if (span < 2000) return;
+    const fps = perfN * 1000 / span; perfStart = pn; perfN = 0;
+    if (span > 4000 || document.hidden) return;
+    if (perfWarm > 0) { perfWarm--; return; }
+    if (fps >= 45) return;
+    if (pr > 1.01) { pr = Math.max(1, pr - 0.25); renderer.setPixelRatio(pr); renderer.setSize(innerWidth, innerHeight, false); }
+    else if (activePet > 30) { activePet = Math.max(30, Math.floor(activePet * 0.7)); petals.count = activePet; }
+  }
+  function frame() {
+    requestAnimationFrame(frame);
+    const dt = Math.min(clock.getDelta(), 0.05); NOW += dt; const t = NOW;
+    adaptQuality();
+    runTweens();
+    S.px += (S.tx - S.px) * Math.min(1, dt * 2.5); S.py += (S.ty - S.py) * Math.min(1, dt * 2.5);
+    camera.position.x = S.px * 0.5; camera.position.y = -S.py * 0.35; camera.lookAt(0, 0, 0);
+
+    const wind = S.px * 0.35;
+    for (let i = 0; i < activePet; i++) {
+      const p = pd[i], V = vis(p.z), damp = Math.exp(-1.5 * dt);
+      p.bx *= damp; p.by *= damp;
+      p.y += (p.by - p.vy) * dt;
+      p.x += (Math.sin(t * p.sw + p.ph) * 0.35 + wind + p.bx) * dt;
+      p.rx += p.sx * dt; p.ry += p.sy * dt;
+      if (p.y < -V.h / 2 - 1 || p.y > V.h / 2 + 4 || Math.abs(p.x) > V.w * 0.75) spawn(p, false);
+      dummy.position.set(p.x, p.y, p.z);
+      dummy.rotation.set(p.rx + Math.sin(t * 1.3 + p.ph) * 0.6, p.ry, p.rz);
+      dummy.scale.setScalar(p.s); dummy.updateMatrix(); petals.setMatrixAt(i, dummy.matrix);
+    }
+    petals.instanceMatrix.needsUpdate = true;
+
+    for (const m of floaters) { const u = m.userData; m.position.y = (u.by || 0) + Math.sin(t * u.sp + u.ph) * 0.35; m.rotation.y = t * 0.45 * u.dir + u.ph; m.rotation.z = Math.sin(t * 0.7 + u.ph) * 0.2; }
+    sparkles.material.uniforms.uTime.value = t; sparkles.rotation.y = Math.sin(t * 0.05) * 0.3;
+    const rb = roseRoot.userData.pulse + roseRoot.userData.boost * 0.3;
+    for (const rm of rimMats) { rm.uniforms.uTime.value = t; rm.uniforms.uBoost.value = rb; }
+
+    // tim
+    const hu = hero.userData;
+    hero.visible = hu.vis > 0.002;
+    if (hero.visible) {
+      hero.position.set(hu.base.x, hu.base.y + Math.sin(t * 1.1) * 0.08, 0);
+      hero.scale.setScalar(hu.base.s * hu.vis);
+      heroHeart.rotation.set(0, t * 0.7 + hu.spin, Math.sin(t * 0.9) * 0.06);
+      orbit.rotation.z = t * 0.6; ring2.rotation.z = -t * 0.3;
+    }
+
+    // hộp quà
+    const gu = gift.userData;
+    gift.visible = gu.appear > 0.002 && gu.gone < 0.995;
+    if (gift.visible) {
+      const tc = t % 3.6, tease = S.state === 'gift' && tc < 0.5 ? Math.sin(tc / 0.5 * Math.PI * 4) * 0.05 : 0;
+      gift.position.set(gu.base.x, gu.base.y + Math.sin(t * 1.4) * 0.07 - gu.gone * 0.5, 0);
+      gift.scale.setScalar(Math.max(0.0001, gu.base.s * gu.appear * (1 - gu.gone * 0.5)));
+      gift.rotation.set(0.32, -0.6 + Math.sin(t * 0.5) * 0.22 + S.px * 0.2, tease + gu.shake);
+      const L = gu.lid;
+      lid.position.set(L * 1.5, LID_Y + L * 3.2, L * 0.9); lid.rotation.set(-L * 1.0, L * 0.6, L * 0.8);
+      setOpacity([lidMat, lidRibMat], 1 - Math.max(0, (L - 0.45) / 0.55));
+      setOpacity([boxMat, ribMat], 1 - gu.gone);
+    }
+    giftGlow.material.opacity = Math.min(1, gu.appear) * (1 - gu.gone) * 0.8;
+    giftGlow.visible = giftGlow.material.opacity > 0.01;
+    giftGlow.position.set(gu.base.x, gu.base.y - 0.2, -1.5); giftGlow.scale.setScalar(6 * gu.base.s);
+
+    // đóa hồng
+    const ru = roseRoot.userData;
+    roseRoot.visible = ru.rise > 0.002;
+    if (roseRoot.visible) {
+      const c = ru.cur, k = Math.min(1, dt * 3);
+      c.x += (ru.base.x - c.x) * k; c.y += (ru.base.y - c.y) * k; c.s += (ru.base.s - c.s) * k;
+      roseRoot.scale.setScalar(c.s * (0.3 + 0.7 * ru.rise) * (1 - ru.away * 0.35) * (1 + ru.pulse * 0.06));
+      roseRoot.position.set(c.x * (1 - ru.away), c.y - (1 - ru.rise) * 3.2 + ru.away * 1.3 + Math.sin(t * 1.1) * 0.05, -ru.away * 6);
+      if (!ctl.drag) {
+        ctl.rotY += ctl.vy; ctl.vy *= Math.exp(-2.4 * dt);
+        ctl.rotX = clamp(ctl.rotX + ctl.vx, -0.8, 0.7); ctl.vx *= Math.exp(-5 * dt); ctl.rotX *= Math.exp(-0.7 * dt);
+        if (Math.abs(ctl.vy) < 0.003) ctl.rotY += dt * 0.2;
+      }
+      roseSpin.rotation.set(0.5 + ctl.rotX - S.py * 0.1, ctl.rotY + S.px * 0.25 - (1 - ru.rise) * 3, Math.sin(t * 0.8) * 0.02);
+      const b = ru.bloom;
+      for (const P of brPetals) {
+        const closed = 0.03 + P.t * 0.16, open = 0.07 + Math.pow(P.t, 1.4) * 1.18;
+        P.m.rotation.x = closed + (open - closed) * b + ru.pulse * (0.12 + P.t * 0.32) + Math.sin(t * 1.3 + P.ph) * 0.018 * P.t * b;
+        P.m.scale.setScalar(0.55 + 0.45 * b);
+      }
+      for (const L of stemLeaves) L.pv.rotation.z = L.rz + Math.sin(t * 1.6 + L.ph) * 0.09;
+      glintMat.uniforms.uTime.value = t; glintMat.uniforms.uBoost.value = ru.boost;
+      sweep.position.set(Math.cos(t * 0.9) * 1.7, 0.7 + Math.sin(t * 0.6) * 0.5, Math.sin(t * 0.9) * 1.7 + 0.6);
+      coreGlow.material.opacity = 0.25 + 0.1 * Math.sin(t * 2.2) + ru.pulse * 0.5;
+      goldDust.rotation.y = t * (0.18 + ru.boost * 1.2);
+      goldDust.material.uniforms.uTime.value = t; goldDust.material.uniforms.uBoost.value = ru.boost * 0.8;
+      roseGlow.material.opacity = ru.rise * (1 - ru.away * 0.7) * (0.55 + ru.pulse * 0.45);
+    }
+
+    // pháo tim
+    for (const h of pool) {
+      if (h.life <= 0) continue;
+      h.life -= dt;
+      h.v.y -= h.g * dt; h.v.multiplyScalar(Math.exp(-0.5 * dt));
+      h.m.position.addScaledVector(h.v, dt);
+      h.m.rotation.x += h.spin.x * dt; h.m.rotation.y += h.spin.y * dt; h.m.rotation.z += h.spin.z * dt;
+      h.m.material.opacity = Math.min(1, h.life / 0.6);
+      if (h.life <= 0) h.m.visible = false;
+    }
+    renderer.render(scene, camera);
+  }
+  requestAnimationFrame(frame);
+
+  /* ---- API cho luồng trải nghiệm ---- */
+  return {
+    layout, bindTouch, rosePulse,
+    enterHero() { const hu = hero.userData, tk = hu.tk = (hu.tk || 0) + 1; hu.spin = 0; return tween(1.4, p => { if (hu.tk === tk) hu.vis = p; }, E.back); },
+    heroBurst() {
+      flashUp();
+      const o = hero.position.clone(); heartBurst(o, 22, 5.2); petalBurst(o.x, o.y, 6);
+      const hu = hero.userData, tk = hu.tk = (hu.tk || 0) + 1, from = hu.vis; return tween(0.9, p => { if (hu.tk === tk) { hu.vis = from * (1 - p); hu.spin = p * 9; } }, E.in);
+    },
+    showGift() { const gu = gift.userData; gu.lid = 0; gu.gone = 0; gu.shake = 0; return tween(1.2, p => { gu.appear = p; }, E.back); },
+    async openGift(onReveal) {
+      const gu = gift.userData, ru = roseRoot.userData;
+      await tween(0.75, p => { gu.shake = Math.sin(p * Math.PI * 9) * 0.1 * (1 - p * 0.5); }, x => x);
+      gu.shake = 0;
+      flashUp();
+      const top = new T.Vector3(gu.base.x, gu.base.y + 0.6 * gu.base.s, 0.5);
+      heartBurst(top, 26, 5.6); petalBurst(top.x, top.y, 7);
+      tween(1.5, p => { gu.lid = p; }, E.out);
+      await sleep(REDUCED ? 100 : 450);
+      ru.cur = Object.assign({}, ru.base); ru.away = 0; ru.bloom = 0; ctl.rotX = 0; ctl.rotY = 0; ctl.vx = ctl.vy = 0;
+      if (onReveal) onReveal();
+      tween(1.3, p => { gu.gone = p; }, E.in);
+      tween(3.4, p => { ru.bloom = p; }, E.sine, 0.7);
+      await tween(2.2, p => { ru.rise = p; }, E.out);
+    },
+    setAway(v) { const ru = roseRoot.userData, from = ru.away; return tween(1.4, p => { ru.away = from + (v - from) * p; }, E.inOut); },
+    celebrate() {
+      const V = vis(0); flashUp(); petalBurst(0, -V.h / 2, 5);
+      for (let i = 0; i < 3; i++) setTimeout(() => heartBurst(new T.Vector3(0, -V.h / 2 - 0.5, -1), 9, 3, { up: true, spread: V.w * 0.45 }), i * 700);
+    },
+    reset() {
+      const gu = gift.userData, ru = roseRoot.userData;
+      gu.appear = 0; gu.lid = 0; gu.gone = 0; ru.rise = 0; ru.bloom = 0; ru.away = 0; ru.pulse = 0; ru.cur = null;
+      layout();
+    }
+  };
+}
+
+/* ---------------- luồng trải nghiệm ---------------- */
+const music = createMusic();
+document.querySelectorAll('.js-sender').forEach(el => { el.textContent = CONFIG.sender; });
+const G = initThree();
+const screens = [...document.querySelectorAll('.screen')];
+function show(id) {
+  S.screen = id;
+  screens.forEach(s => { const on = s.id === id; s.classList.toggle('active', on); s.inert = !on; s.setAttribute('aria-hidden', on ? 'false' : 'true'); });
+  requestAnimationFrame(() => G && G.layout());
+}
+function fillNames() {
+  document.querySelectorAll('.js-name').forEach(el => { el.textContent = S.name; });
+  document.querySelectorAll('.js-given').forEach(el => { el.textContent = S.given; });
+  document.querySelectorAll('.js-sender').forEach(el => { el.textContent = CONFIG.sender; });
+  $('#pSender').textContent = CONFIG.sender;
+}
+function pickLetter() {
+  const n = CONFIG.letters.length; let i = Math.floor(Math.random() * n);
+  if (n > 1 && i === S.lastLetter) i = (i + 1 + Math.floor(Math.random() * (n - 1))) % n;
+  S.lastLetter = i; return CONFIG.letters[i];
+}
+
+addEventListener('pointermove', e => { S.tx = e.clientX / innerWidth * 2 - 1; S.ty = e.clientY / innerHeight * 2 - 1; }, { passive: true });
+addEventListener('pointerdown', e => { if (!e.target.closest('input')) tapBurst(e.clientX, e.clientY, 5); });
+
+// màn chờ
+async function boot() {
+  music.start();
+  const subs = ['Đang chọn đóa hồng đẹp nhất', 'Đang buộc nơ hồng', 'Đang viết thư tay', 'Sắp xong rồi'];
+  const sub = $('#loaderSub'); let i = 0;
+  const iv = setInterval(() => { i = (i + 1) % subs.length; sub.style.opacity = 0; setTimeout(() => { sub.textContent = subs[i]; sub.style.opacity = 1; }, 300); }, 900);
+  const t0 = performance.now();
+  try { await Promise.race([document.fonts.ready, sleep(2500)]); } catch (e) { /* bỏ qua */ }
+  const wait = 2200 - (performance.now() - t0); if (wait > 0) await sleep(wait);
+  clearInterval(iv);
+  // nhạc bị trình duyệt chặn tự phát: mời người xem chạm một lần để mở quà cùng nhạc
+  if (!music.on) {
+    $('.loader-title').textContent = 'Món quà đã sẵn sàng';
+    sub.textContent = 'Bật âm thanh để cảm nhận trọn vẹn nhé'; sub.style.opacity = 1;
+    $('.loader-bar').hidden = true;
+    const enter = $('#enterBtn'); enter.hidden = false; enter.focus({ preventScroll: true });
+    await new Promise(res => enter.addEventListener('click', res, { once: true }));
+    music.start();
+  }
+  S.state = 'welcome'; show('welcome');
+  if (G) G.enterHero();
+}
+
+// nhập tên
+const form = $('#nameForm'), nameInput = $('#nameInput'), formMsg = $('#formMsg'), preview = $('#preview'), previewName = $('#previewName');
+nameInput.addEventListener('input', () => {
+  const n = formatName(nameInput.value);
+  formMsg.textContent = '';
+  if (!n) { preview.hidden = true; return; }
+  previewName.textContent = 'Thân gửi ' + n;
+  preview.hidden = false;
+});
+try {
+  const pre = new URLSearchParams(location.search).get('ten');
+  if (pre) { nameInput.value = formatName(pre); nameInput.dispatchEvent(new Event('input')); }
+} catch (e) { /* bỏ qua */ }
+nameInput.addEventListener('blur', () => { const n = formatName(nameInput.value); if (n) nameInput.value = n; });
+form.addEventListener('submit', e => {
+  e.preventDefault();
+  if (S.state !== 'welcome') return;
+  const n = formatName(nameInput.value);
+  if (!/\p{L}/u.test(n)) {
+    formMsg.textContent = 'Cậu nhập tên giúp tớ nhé.';
+    form.classList.remove('shake'); void form.offsetWidth; form.classList.add('shake');
+    nameInput.focus(); return;
+  }
+  music.start();
+  S.name = n; S.given = n.split(' ').pop();
+  begin();
+});
+async function begin() {
+  S.state = 'toGift'; fillNames();
+  nameInput.blur();
+  const r = $('#receiveBtn').getBoundingClientRect(); tapBurst(r.left + r.width / 2, r.top + r.height / 2, 12);
+  if (!G) { goEnvelope(); return; }
+  G.heroBurst();
+  await sleep(650);
+  show('giftStage');
+  $('#giftStage').classList.remove('opening');
+  await sleep(250);
+  await G.showGift();
+  S.state = 'gift';
+}
+
+// mở quà → đóa hồng
+async function openGift() {
+  if (S.state !== 'gift') return;
+  S.state = 'opening';
+  $('#giftStage').classList.add('opening');
+  await G.openGift(() => show('roseStage'));
+  S.state = 'rose';
+}
+$('#openGiftBtn').addEventListener('click', openGift);
+if (G) {
+  G.bindTouch($('#giftSlot'), openGift);
+  G.bindTouch($('#roseSlot'), G.rosePulse);
+  G.bindTouch($('#finaleSlot'), G.rosePulse);
+}
+
+// phong thư
+const env = $('#env');
+function goEnvelope() {
+  S.state = 'envelope';
+  if (G) G.setAway(1);
+  env.classList.remove('open', 'drop'); void env.offsetWidth; env.classList.add('drop');
+  show('envelope');
+}
+$('#toEnvelope').addEventListener('click', goEnvelope);
+env.addEventListener('click', async () => {
+  if (S.state !== 'envelope') return;
+  S.state = 'opening-letter';
+  env.classList.add('open');
+  const r = env.getBoundingClientRect(); tapBurst(r.left + r.width / 2, r.top + r.height * 0.62, 14);
+  await sleep(REDUCED ? 300 : 1900);
+  S.letter = pickLetter();
+  show('letter'); startLetter(false);
+});
+
+// thư tay & hiệu ứng gõ chữ
+const paper = $('#paper'), pBody = $('#pBody'), pPs = $('#pPs'), pSign = $('#pSign'), skipBtn = $('#skipBtn'), anotherBtn = $('#anotherBtn'), toFinale = $('#toFinale');
+let run = 0, skipTyping = false;
+function typeInto(el, text, id) {
+  return new Promise(res => {
+    let i = 0, last = performance.now();
+    el.classList.add('typing');
+    const stick = () => { if (paper.scrollHeight - paper.scrollTop - paper.clientHeight < 140) paper.scrollTop = paper.scrollHeight; };
+    function step(now) {
+      if (id !== run) return res();
+      if (skipTyping) { el.textContent = text; el.classList.remove('typing'); stick(); return res(); }
+      const n = Math.floor((now - last) / 1000 * 38);
+      if (n > 0) { i = Math.min(text.length, i + n); last = now; el.textContent = text.slice(0, i); stick(); }
+      if (i >= text.length) { el.classList.remove('typing'); setTimeout(res, 380); }
+      else requestAnimationFrame(step);
+    }
+    requestAnimationFrame(step);
+  });
+}
+async function startLetter(instant) {
+  const L = S.letter, id = ++run;
+  S.state = 'letter';
+  skipTyping = instant || REDUCED;
+  $('#pDate').textContent = CONFIG.date;
+  $('#pGreet').textContent = 'Thân gửi ' + S.name + ',';
+  pBody.innerHTML = ''; pPs.classList.remove('show'); pSign.classList.remove('show'); paper.scrollTop = 0;
+  pPs.innerHTML = '<b>Tái bút:</b> '; pPs.appendChild(document.createTextNode(fillText(L.ps)));
+  skipBtn.hidden = skipTyping; anotherBtn.hidden = true; toFinale.hidden = true;
+  if (!skipTyping) await sleep(900);
+  for (const text of L.paragraphs) {
+    if (id !== run) return;
+    const p = document.createElement('p'); pBody.appendChild(p);
+    if (skipTyping) { p.textContent = fillText(text); p.classList.add('fade'); continue; }
+    await typeInto(p, fillText(text), id);
+  }
+  if (id !== run) return;
+  if (L.closing) { const c = document.createElement('p'); c.className = 'closing fade'; c.textContent = fillText(L.closing); pBody.appendChild(c); }
+  await sleep(skipTyping ? 50 : 450);
+  if (id !== run) return;
+  pPs.classList.add('show'); pSign.classList.add('show');
+  setTimeout(() => { if (id === run && paper.scrollHeight - paper.scrollTop - paper.clientHeight < 400) paper.scrollTo({ top: paper.scrollHeight, behavior: 'smooth' }); }, 300);
+  skipBtn.hidden = true; anotherBtn.hidden = false; toFinale.hidden = false;
+}
+skipBtn.addEventListener('click', () => { skipTyping = true; });
+anotherBtn.addEventListener('click', () => {
+  S.letter = pickLetter();
+  paper.classList.remove('swap'); void paper.offsetWidth; paper.classList.add('swap');
+  const r = paper.getBoundingClientRect(); tapBurst(r.left + r.width / 2, r.top + 60, 10);
+  startLetter(false);
+});
+
+// lời kết
+toFinale.addEventListener('click', () => {
+  run++; S.state = 'finale'; show('finale');
+  if (G) { G.setAway(0); G.celebrate(); }
+});
+$('#rereadBtn').addEventListener('click', () => { if (G) G.setAway(1); show('letter'); startLetter(true); });
+$('#newLetterBtn').addEventListener('click', () => { if (G) G.setAway(1); S.letter = pickLetter(); show('letter'); startLetter(false); });
+$('#restartBtn').addEventListener('click', () => {
+  run++; S.letter = null; S.state = 'welcome';
+  nameInput.value = ''; preview.hidden = true; formMsg.textContent = '';
+  if (G) G.reset();
+  show('welcome');
+  if (G) G.enterHero();
+  setTimeout(() => nameInput.focus({ preventScroll: true }), 600);
+});
+
+screens.forEach(s => { if (!s.classList.contains('active')) { s.inert = true; s.setAttribute('aria-hidden', 'true'); } });
+boot();
+})();
+</script>
+
+</body>
+</html>
